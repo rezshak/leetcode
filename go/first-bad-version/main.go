@@ -5,7 +5,7 @@ package main
 import "fmt"
 
 func isBadVersion(n int) bool {
-	return n == 4
+	return n >= 4
 }
 
 // T: O(log n), S: O(1)
