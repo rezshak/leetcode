@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// T: O(n), S: O(n)
 func productExceptSelf(nums []int) []int {
 	len := len(nums)
 	result := make([]int, len)

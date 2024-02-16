@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Solution {
 
+    // T: O(n), S: O(n)
     public int[] productExceptSelf(int[] nums) {
         int len = nums.length;
         int[] result = new int[len];

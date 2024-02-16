@@ -4,6 +4,7 @@ package ReverseBits;
 
 public class Solution {
 
+    // T: O(1), S: O(1)
     public int reverseBits(int num) {
         var res = 0;
         var lsb = 0;

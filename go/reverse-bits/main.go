@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// T: O(1), S: O(1)
 func reverseBits(num uint32) uint32 {
 	var res uint32
 	var lsb uint32

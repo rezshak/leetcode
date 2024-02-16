@@ -4,6 +4,7 @@ package main
 
 import "fmt"
 
+// T: O(n), S: O(n)
 func majorityElement(nums []int) int {
 	freqs := make(map[int]int)
 	for _, num := range nums {
@@ -15,6 +16,7 @@ func majorityElement(nums []int) int {
 	return -1
 }
 
+// T: O(n), S: O(1)
 func majorityElement2(nums []int) int {
 	majority := nums[0]
 	count := 1

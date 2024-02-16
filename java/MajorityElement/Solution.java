@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 class Solution {
 
+    // T: O(n), S: O(n)
     public int majorityElement(int[] nums) {
         var freqs = new HashMap<Integer, Integer>();
         for (int num : nums) {
@@ -22,6 +23,7 @@ class Solution {
         return num;
     }
 
+    // T: O(n), S: O(1)
     public int majorityElement2(int[] nums) {
         int majority = nums[0];
         int count = 1;

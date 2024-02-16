@@ -4,6 +4,7 @@ package main
 
 import "fmt"
 
+// T: O(n), S: O(1)
 func sortColors(nums []int) {
 	left, mid, right := 0, 0, len(nums)-1
 	for mid <= right {
