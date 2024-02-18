@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/string-to-integer-atoi/description/
+// https://leetcode.com/problems/string-to-integer-atoi/
 package main
 
 import (

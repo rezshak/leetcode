@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/reverse-bits/description/
+// https://leetcode.com/problems/reverse-bits/
 
 package main
 

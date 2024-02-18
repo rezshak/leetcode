@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/add-two-numbers/description/
+// https://leetcode.com/problems/add-two-numbers/
 
 package AddTwoNumbers;
 

@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/lexicographically-smallest-palindrome/description/
+// https://leetcode.com/problems/lexicographically-smallest-palindrome/
 
 package LexicographicallySmallestPalindrome;
 

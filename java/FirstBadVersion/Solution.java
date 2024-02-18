@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/first-bad-version/description/
+// https://leetcode.com/problems/first-bad-version/
 
 package FirstBadVersion;
 

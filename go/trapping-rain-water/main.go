@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/trapping-rain-water/description/
+// https://leetcode.com/problems/trapping-rain-water/
 
 package main
 

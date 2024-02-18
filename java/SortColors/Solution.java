@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/sort-colors/description/
+// https://leetcode.com/problems/sort-colors/
 
 package SortColors;
 

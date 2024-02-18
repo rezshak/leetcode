@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/add-binary/description/
+// https://leetcode.com/problems/add-binary/
 
 package main
 
