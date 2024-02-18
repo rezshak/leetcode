@@ -1,13 +1,16 @@
 {
 	"folders": [
-	  {
-		"name": "Go",
-		"path": "go"
-	  },
-	  {
-		"name": "Java",
-		"path": "java"
-	  }
+		{
+			"name": "Go",
+			"path": "go"
+		},
+		{
+			"name": "Java",
+			"path": "java"
+		},
+		{
+			"name": "SQL",
+			"path": "sql"
+		}
 	]
-  }
-  
+}
