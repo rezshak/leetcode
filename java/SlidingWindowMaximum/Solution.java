@@ -5,59 +5,32 @@ package SlidingWindowMaximum;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Deque;
-import java.util.PriorityQueue;
 
 public class Solution {
 
+    // T: O(n), S: O(n)
     public int[] maxSlidingWindow(int[] nums, int k) {
         Deque<Integer> dq = new ArrayDeque<>();
         int n = nums.length;
-        var result = new int[n - k + 1];
+        int[] result = new int[n - k + 1];
         int idx = 0;
-
-        for (int i = 0; i < k; i++) {
-            while (!dq.isEmpty() && nums[i] >= nums[dq.peek()]) {
-                dq.remove();
+        for (int i = 0; i < n; i++) {
+            while (!dq.isEmpty() && nums[i] >= nums[dq.peekLast()]) {
+                dq.pollLast();
             }
-            dq.add(i);
-        }
-        result[idx++] = nums[dq.peekFirst()];
-
-        for (int i = k; i < nums.length; i++) {
-            if (dq.peekFirst() == i - k) {
-                dq.removeFirst();
+            dq.offer(i);
+            if (i - dq.peekFirst() >= k) {
+                dq.pollFirst();
             }
-            while (!dq.isEmpty() && nums[i] >= nums[dq.peek()]) {
-                dq.remove();
+            if (i >= k - 1) {
+                result[idx++] = nums[dq.peekFirst()];
             }
-
-            dq.add(i);
-            result[idx++] = nums[dq.peekFirst()];
         }
         return result;
     }
 
-    public int[] findMaxSlidingWindowOpt(int[] nums, int k) {
-        int n = nums.length, l = 0, r = Math.min(l + k, n);
-        var result = new int[n - k + 1];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = max(nums, l, r);
-            l++;
-            r++;
-        }
-        return result;
-    }
-
-    private int max(int[] nums, int l, int r) {
-        var pq = new PriorityQueue<Integer>(Collections.reverseOrder());
-        for (int i = l; i < r; i++) {
-            pq.add(nums[i]);
-        }
-        return pq.poll();
-    }
-
+    // T: O(nk), S: O(n)
     public int[] maxSlidingWindowBrute(int[] nums, int k) {
         int l = 0, r = k, n = nums.length;
         var result = new ArrayList<Integer>();
@@ -85,6 +58,8 @@ public class Solution {
         var nums1 = new int[] { 1, 3, -1, -3, 5, 3, 6, 7 };
         var result1 = sol.maxSlidingWindow(nums1, 3); // [3,3,5,5,6,7]
         System.out.println(Arrays.toString(result1));
+        var result2 = sol.maxSlidingWindow(nums1, 3); // [3,3,5,5,6,7]
+        System.out.println(Arrays.toString(result2));
     }
 
 }
