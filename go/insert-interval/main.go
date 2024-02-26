@@ -7,7 +7,7 @@ import (
 )
 
 // T: O(n), S: O(n)
-func insertInterval(intervals [][]int, newInterval []int) [][]int {
+func insert(intervals [][]int, newInterval []int) [][]int {
 	var result [][]int
 	i := 0
 	for i < len(intervals) && intervals[i][1] < newInterval[0] {
@@ -55,7 +55,7 @@ func main() {
 	for i := 0; i < len(newIntervals); i++ {
 		fmt.Printf("\nExisting intervals: %v\n", existingIntervals[i])
 		fmt.Printf("New interval: %v\n", newIntervals[i])
-		output := insertInterval(existingIntervals[i], newIntervals[i])
+		output := insert(existingIntervals[i], newIntervals[i])
 		fmt.Printf("Updated intervals: %v\n", output)
 	}
 }

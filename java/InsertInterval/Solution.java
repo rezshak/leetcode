@@ -7,7 +7,7 @@ import java.util.*;
 public class Solution {
 
     // T: O(n), S: O(n)
-    public static int[][] insertInterval(int[][] existingIntervals, int[] newInterval) {
+    public static int[][] insert(int[][] existingIntervals, int[] newInterval) {
         var result = new ArrayList<int[]>();
         int i = 0;
         while (i < existingIntervals.length && existingIntervals[i][1] < newInterval[0]) {
@@ -43,7 +43,7 @@ public class Solution {
             System.out.print("\nExisting intervals: ");
             System.out.println(Arrays.deepToString(existingIntervals[i]));
             System.out.println("New interval: " + Arrays.toString(newIntervals[i]));
-            int[][] output = insertInterval(existingIntervals[i], newIntervals[i]);
+            int[][] output = insert(existingIntervals[i], newIntervals[i]);
             System.out.println("Updated intervals: " + Arrays.deepToString(output));
         }
     }
