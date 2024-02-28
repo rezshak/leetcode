@@ -4,6 +4,7 @@ package CheckIfArrayIsSortedAndRotated;
 
 public class Solution {
 
+    // T: O(n), S: O(1)
     public boolean check(int[] nums) {
         int count = 0;
         int len = nums.length;

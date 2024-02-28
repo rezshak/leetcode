@@ -4,6 +4,7 @@ package main
 
 import "fmt"
 
+// T: O(n), S: O(1)
 func check(nums []int) bool {
 	count := 0
 	len := len(nums)
