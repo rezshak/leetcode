@@ -1,11 +1,6 @@
-// https://leetcode.com/problems/reverse-nodes-in-k-group/
-
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
 type ListNode struct {
 	val  int
@@ -21,21 +16,23 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 		if kth == nil {
 			break
 		}
-		// reverse group
 		groupNext := kth.next
-		prev := groupNext
-		curr := groupPrev.next
-		for curr != groupNext {
-			temp := curr.next
-			curr.next = prev
-			prev = curr
-			curr = temp
-		}
-		temp := groupPrev.next
-		groupPrev.next = prev
-		groupPrev = temp
+		newGroupPrev := groupPrev.next // The head of the current group will be the prev of the next group
+		groupPrev.next = reverse(groupPrev.next, groupNext)
+		groupPrev = newGroupPrev
 	}
 	return fake.next
+}
+
+func reverse(start, end *ListNode) *ListNode {
+	prev := end
+	for start != end {
+		temp := start.next
+		start.next = prev
+		prev = start
+		start = temp
+	}
+	return prev
 }
 
 func getKth(node *ListNode, k int) *ListNode {
@@ -50,15 +47,13 @@ func getKth(node *ListNode, k int) *ListNode {
 }
 
 func printList(head *ListNode) {
-	var sb strings.Builder
 	curr := head
-	sb.WriteString("[ ")
+	fmt.Print("[ ")
 	for curr != nil {
-		sb.WriteString(fmt.Sprintf("%d ", curr.val))
+		fmt.Print(curr.val, " ")
 		curr = curr.next
 	}
-	sb.WriteString("]")
-	fmt.Println(sb.String())
+	fmt.Println("]")
 }
 
 func main() {

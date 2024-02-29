@@ -16,29 +16,31 @@ public class Solution {
 
     // T: O(n), S: O(1)
     public ListNode reverseKGroup(ListNode head, int k) {
-        var fake = new ListNode(-1);
+        ListNode fake = new ListNode(-1);
         fake.next = head;
-        var groupPrev = fake;
+        ListNode groupPrev = fake;
         while (true) {
-            var kth = getKth(groupPrev, k);
+            ListNode kth = getKth(groupPrev, k);
             if (kth == null) {
                 break;
             }
-            // reverse group
-            var groupNext = kth.next;
-            var prev = groupNext;
-            var curr = groupPrev.next;
-            while (curr != groupNext) {
-                var temp = curr.next;
-                curr.next = prev;
-                prev = curr;
-                curr = temp;
-            }
-            var temp = groupPrev.next;
-            groupPrev.next = prev;
-            groupPrev = temp;
+            ListNode groupNext = kth.next;
+            ListNode newGroupPrev = groupPrev.next; // The head of the current group will be the prev of the next group
+            groupPrev.next = reverse(groupPrev.next, groupNext);
+            groupPrev = newGroupPrev;
         }
         return fake.next;
+    }
+    
+    private ListNode reverse(ListNode start, ListNode end) {
+        ListNode prev = end;
+        while (start != end) {
+            ListNode temp = start.next;
+            start.next = prev;
+            prev = start;
+            start = temp;
+        }
+        return prev;
     }
 
     private ListNode getKth(ListNode node, int k) {
