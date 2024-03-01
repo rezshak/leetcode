@@ -7,13 +7,24 @@ import java.util.List;
 
 public class Solution {
 
-    // T: O(n), S: O(1)
+    // T: O(n), S: O(n)
     public List<Boolean> prefixesDivBy5(int[] nums) {
-        List<Boolean> result = new ArrayList<>();
-        int base10 = 0;
+        var result = new ArrayList<Boolean>(nums.length);
+        int dec = 0;
         for (int base2 : nums) {
-            base10 = ((base10 << 1) + base2) % 5;
-            result.add(base10 == 0);
+            dec = (dec * 2 + base2) % 5;
+            result.add(dec == 0);
+        }
+        return result;
+    }
+
+    // T: O(n), S: O(n)
+    public List<Boolean> prefixesDivBy5Bitwise(int[] nums) {
+        var result = new ArrayList<Boolean>(nums.length);
+        int dec = 0;
+        for (int bit : nums) {
+            dec = ((dec << 1) + bit) % 5;
+            result.add(dec == 0);
         }
         return result;
     }
@@ -24,6 +35,8 @@ public class Solution {
         int[] nums2 = { 1, 1, 1 }; // [false,false,false]
         System.out.println(sol.prefixesDivBy5(nums1));
         System.out.println(sol.prefixesDivBy5(nums2));
+        System.out.println(sol.prefixesDivBy5Bitwise(nums1));
+        System.out.println(sol.prefixesDivBy5Bitwise(nums2));
     }
 
 }
