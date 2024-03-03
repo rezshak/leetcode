@@ -20,8 +20,8 @@ func hammingWeight(n uint32) int {
 }
 
 func main() {
-	n1 := 00000000000000000000000000001011
-	n2 := 00000000000000000000000010000000
+	n1 := uint32(00000000000000000000000000001011)
+	n2 := uint32(00000000000000000000000010000000)
 	fmt.Println(hammingWeight(n1)) // 3
 	fmt.Println(hammingWeight(n2)) // 1
 }
