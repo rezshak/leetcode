@@ -7,9 +7,9 @@ import (
 )
 
 // T: O(1), S: O(1)
-func hammingWeight(n int) int {
+func hammingWeight(n uint32) int {
 	count := 0
-	mask := 1
+	mask := uint32(1)
 	for i := 0; i < 32; i++ {
 		if n&mask != 0 {
 			count++
