@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/find-pivot-index/
 
+package FindPivotIndex;
+
 public class Solution {
 
     // T: O(n), S: O(1)
