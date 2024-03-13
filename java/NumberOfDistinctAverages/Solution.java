@@ -5,7 +5,7 @@ package NumberOfDistinctAverages;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class Solution {
+class Solution {
 
     // T: O(n log n), S: O(n)
     public int distinctAverages(int[] nums) {

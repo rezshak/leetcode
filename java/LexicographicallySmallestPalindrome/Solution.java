@@ -2,7 +2,7 @@
 
 package LexicographicallySmallestPalindrome;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public String makeSmallestPalindrome(String str) {

@@ -16,7 +16,7 @@ class TreeNode {
     }
 }
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public List<Integer> inorderTraversal(TreeNode root) { // lnr

@@ -2,7 +2,7 @@
 
 package MaximumAverageSubarrayI;
 
-public class Solution {
+class Solution {
 
     // T: O(n), O(1)
     public double findMaxAverage(int[] nums, int k) {

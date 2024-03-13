@@ -7,7 +7,7 @@ import java.util.BitSet;
 import java.util.HashSet;
 import java.util.List;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public List<Integer> findDisappearedNumbers(int[] nums) {

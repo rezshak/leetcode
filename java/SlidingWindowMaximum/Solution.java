@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public int[] maxSlidingWindow(int[] nums, int k) {

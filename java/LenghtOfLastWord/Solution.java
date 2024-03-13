@@ -2,7 +2,7 @@
 
 package LenghtOfLastWord;
 
-public class Solution {
+class Solution {
 
     public int lengthOfLastWord(String s) {
         int len = s.length(), right = len - 1;

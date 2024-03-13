@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Solution {
+class Solution {
 
     // T: O(n^2), S: O(n)
     public List<List<Integer>> threeSum(int[] nums) {

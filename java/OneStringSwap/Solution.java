@@ -4,7 +4,7 @@ package OneStringSwap;
 
 import java.util.Arrays;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public boolean areAlmostEqual(String s1, String s2) {

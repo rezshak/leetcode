@@ -2,7 +2,7 @@
 
 package MergeStringsAlternately;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public String mergeAlternately(String word1, String word2) {

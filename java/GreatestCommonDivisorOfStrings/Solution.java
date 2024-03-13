@@ -2,7 +2,7 @@
 
 package GreatestCommonDivisorOfStrings;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public String gcdOfStrings(String str1, String str2) {

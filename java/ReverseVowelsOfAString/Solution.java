@@ -4,7 +4,7 @@ package ReverseVowelsOfAString;
 
 import java.util.Set;
 
-public class Solution {
+class Solution {
 
     private static final Set<Character> VOWELS = Set.of(
             'A', 'E', 'I', 'O', 'U',

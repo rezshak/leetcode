@@ -2,7 +2,7 @@
 
 package LongestContinuousIncreasingSubsequence;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public int findLengthOfLCIS(int[] nums) {

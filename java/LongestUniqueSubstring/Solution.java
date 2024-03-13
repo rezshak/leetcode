@@ -4,7 +4,7 @@ package LongestUniqueSubstring;
 
 import java.util.HashSet;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(min(n, m))
     public int lengthOfLongestSubstring(String s) {

@@ -2,7 +2,7 @@
 
 package CellsWithOddValues;
 
-public class Solution {
+class Solution {
 
     // T: O(mn), S: O(mn)
     public int oddCells(int m, int n, int[][] indices) {

@@ -2,7 +2,7 @@
 
 package ReverseBits;
 
-public class Solution {
+class Solution {
 
     // T: O(1), S: O(1)
     public int reverseBits(int num) {

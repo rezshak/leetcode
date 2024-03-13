@@ -2,7 +2,7 @@
 
 package TimeNeededToBuyTickets;
 
-public class Solution {
+class Solution {
 
     // T: O(n^2), S: O(1)
     public int timeRequiredToBuy(int[] tickets, int k) {

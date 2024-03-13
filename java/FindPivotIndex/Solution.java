@@ -2,7 +2,7 @@
 
 package FindPivotIndex;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public int pivotIndex(int[] nums) {

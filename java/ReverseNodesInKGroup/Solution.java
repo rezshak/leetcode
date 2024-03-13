@@ -12,7 +12,7 @@ class ListNode {
     }
 }
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public ListNode reverseKGroup(ListNode head, int k) {

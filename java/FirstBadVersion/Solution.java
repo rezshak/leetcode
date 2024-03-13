@@ -8,7 +8,7 @@ class VersionControl {
     }
 }
 
-public class Solution extends VersionControl {
+class Solution extends VersionControl {
 
     // T: O(log n), S: O(1)
     public int firstBadVersion(int n) {

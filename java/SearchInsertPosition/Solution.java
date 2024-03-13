@@ -2,7 +2,7 @@
 
 package SearchInsertPosition;
 
-public class Solution {
+class Solution {
 
     // T: O(log(n)), S: O(1)
     public int searchInsert(int[] nums, int target) {

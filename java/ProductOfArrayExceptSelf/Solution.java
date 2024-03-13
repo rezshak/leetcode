@@ -4,7 +4,7 @@ package ProductOfArrayExceptSelf;
 
 import java.util.Arrays;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public int[] productExceptSelf(int[] nums) {

@@ -2,7 +2,7 @@
 
 package Base7;
 
-public class Solution {
+class Solution {
 
     // T: O(log(n)), S: O(1)
     public String convertToBase7(int num) {

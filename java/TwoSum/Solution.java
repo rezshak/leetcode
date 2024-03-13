@@ -5,7 +5,7 @@ package TwoSum;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public int[] twoSum(int[] nums, int target) {

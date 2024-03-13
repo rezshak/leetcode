@@ -12,7 +12,7 @@ class ListNode {
     }
 }
 
-public class Solution {
+class Solution {
 
     // T: O(max(m, n)), S: O(max(m, n))
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

@@ -4,7 +4,7 @@ package StringCompression;
 
 import java.util.Arrays;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public int compress(char[] chars) {

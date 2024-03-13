@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/rotate-string/
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public boolean rotateString(String s, String goal) {

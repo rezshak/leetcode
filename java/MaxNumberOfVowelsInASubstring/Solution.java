@@ -4,7 +4,7 @@ package MaxNumberOfVowelsInASubstring;
 
 import java.util.Set;
 
-public class Solution {
+class Solution {
 
     private static final Set<Character> VOWELS = Set.of('a', 'e', 'i', 'o', 'u');
 

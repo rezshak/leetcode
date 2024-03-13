@@ -4,7 +4,7 @@ package MoveZeroes;
 
 import java.util.Arrays;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public void moveZeros(int[] nums) {

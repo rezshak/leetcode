@@ -2,7 +2,7 @@
 
 package NumberOf1Bits;
 
-public class Solution {
+class Solution {
 
     // T: O(1), S: O(1)
     public int hammingWeight(int n) {

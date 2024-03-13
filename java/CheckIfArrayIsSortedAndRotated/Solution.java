@@ -2,7 +2,7 @@
 
 package CheckIfArrayIsSortedAndRotated;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public boolean check(int[] nums) {

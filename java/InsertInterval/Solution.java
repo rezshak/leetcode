@@ -4,7 +4,7 @@ package InsertInterval;
 
 import java.util.*;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public static int[][] insert(int[][] existingIntervals, int[] newInterval) {

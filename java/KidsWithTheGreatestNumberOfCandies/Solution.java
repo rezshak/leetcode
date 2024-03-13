@@ -4,7 +4,7 @@ package KidsWithTheGreatestNumberOfCandies;
 
 import java.util.*;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {

@@ -4,7 +4,7 @@ package FindTheDifference;
 
 import java.util.HashMap;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public char findTheDifference(String s, String t) {

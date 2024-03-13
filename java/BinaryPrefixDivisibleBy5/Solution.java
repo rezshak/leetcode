@@ -5,7 +5,7 @@ package BinaryPrefixDivisibleBy5;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public List<Boolean> prefixesDivBy5(int[] nums) {

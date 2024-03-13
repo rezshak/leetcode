@@ -4,7 +4,7 @@ package Convert1dArrayInto2dArray;
 
 import java.util.Arrays;
 
-public class Solution {
+class Solution {
 
     // T: O(mn), S: (mn)
     public int[][] construct2DArray(int[] original, int m, int n) {

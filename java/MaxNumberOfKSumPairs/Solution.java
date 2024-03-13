@@ -5,7 +5,7 @@ package MaxNumberOfKSumPairs;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Solution {
+class Solution {
 
     // T: O(n log n), S: O(1)
     public int maxOperations(int[] nums, int k) {

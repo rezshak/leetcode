@@ -2,7 +2,7 @@
 
 package FinalValueOfVariable;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(1)
     public int finalValueAfterOperations(String[] operations) {

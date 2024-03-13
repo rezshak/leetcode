@@ -2,7 +2,7 @@
 
 package ReverseWordsInAString;
 
-public class Solution {
+class Solution {
 
     // T: O(n), S: O(n)
     public String reverseWords(String s) {
