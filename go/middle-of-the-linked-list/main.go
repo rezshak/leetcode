@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/linked-list-cycle/
+// https://leetcode.com/problems/middle-of-the-linked-list/
 
 package main
 
@@ -10,16 +10,13 @@ type ListNode struct {
 }
 
 // T: O(n), S: O(1)
-func hasCycle(head *ListNode) bool {
+func middleNode(head *ListNode) *ListNode {
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
-		if slow == fast {
-			return true
-		}
 	}
-	return false
+	return slow
 }
 
 func (l *ListNode) printList(head *ListNode) {
@@ -33,13 +30,12 @@ func (l *ListNode) printList(head *ListNode) {
 }
 
 func main() {
-	// 3,2,0,-4
-	head1 := &ListNode{Val: 3}
+	// 1,2,3,4,5
+	head1 := &ListNode{Val: 1}
 	head1.Next = &ListNode{Val: 2}
-	head1.Next.Next = &ListNode{Val: 0}
-	head1.Next.Next.Next = &ListNode{Val: -4}
+	head1.Next.Next = &ListNode{Val: 3}
+	head1.Next.Next.Next = &ListNode{Val: 4}
+	head1.Next.Next.Next.Next = &ListNode{Val: 5}
 	head1.printList(head1)
-	fmt.Println(hasCycle(head1)) // false
-	head1.Next.Next.Next = head1.Next
-	fmt.Println(hasCycle(head1)) // true
+	fmt.Println(middleNode(head1).Val) // 3
 }
