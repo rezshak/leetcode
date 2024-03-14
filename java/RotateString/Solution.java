@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/rotate-string/
 
+package RotateString;
+
 class Solution {
 
     // T: O(n), S: O(n)
