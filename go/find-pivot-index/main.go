@@ -11,7 +11,8 @@ func pivotIndex(nums []int) int {
 		totalSum += num
 	}
 	for i := 0; i < len(nums); i++ {
-		if leftSum == totalSum-leftSum-nums[i] {
+		rightSum := totalSum - leftSum - nums[i]
+		if leftSum == rightSum {
 			return i
 		}
 		leftSum += nums[i]
