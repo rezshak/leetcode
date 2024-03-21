@@ -1,0 +1,85 @@
+// https://leetcode.com/problems/palindrome-linked-list/
+
+package main
+
+import "fmt"
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func NewListNode(val int) *ListNode {
+	return &ListNode{Val: val, Next: nil}
+}
+
+func isPalindrome(head *ListNode) bool {
+	var st []int
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		st = append(st, slow.Val)
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	if fast != nil {
+		slow = slow.Next
+	}
+	i := len(st) - 1
+	for slow != nil && len(st) != 0 {
+		val := slow.Val
+		if val != st[i] {
+			return false
+		}
+		i--
+		slow = slow.Next
+	}
+	return true
+}
+
+func isPalindromeFullStack(head *ListNode) bool {
+	var st []int
+	curr := head
+	for curr != nil {
+		st = append(st, curr.Val)
+		curr = curr.Next
+	}
+	curr = head
+	i := len(st) - 1
+	for curr != nil {
+		val := st[i]
+		if val != curr.Val {
+			return false
+		}
+		i--
+		curr = curr.Next
+	}
+	return true
+}
+
+func main() {
+	// [1,2,2,1]
+	head1 := NewListNode(1)
+	head1.Next = NewListNode(2)
+	head1.Next.Next = NewListNode(2)
+	head1.Next.Next.Next = NewListNode(1)
+	fmt.Println(isPalindrome(head1))          // true
+	fmt.Println(isPalindromeFullStack(head1)) // true
+	// [1,2]
+	head2 := NewListNode(1)
+	head2.Next = NewListNode(2)
+	fmt.Println(isPalindrome(head2))          // false
+	fmt.Println(isPalindromeFullStack(head2)) // false
+	// [1,1,2,1]
+	head3 := NewListNode(1)
+	head3.Next = NewListNode(1)
+	head3.Next.Next = NewListNode(2)
+	head3.Next.Next.Next = NewListNode(1)
+	fmt.Println(isPalindrome(head3))          // false
+	fmt.Println(isPalindromeFullStack(head3)) // false
+	// [1,0,1]
+	var head4 = NewListNode(1)
+	head4.Next = NewListNode(0)
+	head4.Next.Next = NewListNode(1)
+	fmt.Println(isPalindrome(head4))          // true
+	fmt.Println(isPalindromeFullStack(head4)) // true
+}
