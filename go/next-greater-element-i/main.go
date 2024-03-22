@@ -1,0 +1,44 @@
+// https://leetcode.com/problems/next-greater-element-i/
+
+package main
+
+import "fmt"
+
+// T: O(n*m), S: O(1)
+func nextGreaterElement(nums1 []int, nums2 []int) []int {
+	res := make([]int, len(nums1))
+	for i, num := range nums1 {
+		idx := indexOf(nums2, num)
+		res[i] = nextGreater(nums2, num, idx+1)
+	}
+	return res
+}
+
+// T: O(n), S: O(1)
+func indexOf(nums []int, num int) int {
+	for i, n := range nums {
+		if n == num {
+			return i
+		}
+	}
+	return -1
+}
+
+// T: O(n), S: O(1)
+func nextGreater(nums []int, num int, idx int) int {
+	for i := idx; i < len(nums); i++ {
+		if nums[i] > num {
+			return nums[i]
+		}
+	}
+	return -1
+}
+
+func main() {
+	var nums1 = []int{4, 1, 2}
+	var nums2 = []int{1, 3, 4, 2}
+	fmt.Println(nextGreaterElement(nums1, nums2)) // -1,3,-1
+	nums1 = []int{2, 4}
+	nums2 = []int{1, 2, 3, 4}
+	fmt.Println(nextGreaterElement(nums1, nums2)) // 3,-1
+}
