@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/contains-duplicate/
+
+package main
+
+import "fmt"
+
+// T: O(n), S: O(n)
+func containsDuplicate(nums []int) bool {
+	seen := make(map[int]bool)
+	for _, n := range nums {
+		if seen[n] {
+			return true
+		}
+		seen[n] = true
+	}
+	return false
+}
+
+func main() {
+	var nums1 = []int{1, 2, 3, 1}
+	fmt.Println(containsDuplicate(nums1))
+	var nums2 = []int{1, 2, 3, 4}
+	fmt.Println(containsDuplicate(nums2))
+}
