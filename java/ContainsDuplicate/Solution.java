@@ -2,6 +2,7 @@
 
 package ContainsDuplicate;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 class Solution {
@@ -14,6 +15,17 @@ class Solution {
                 return true;
             }
             seen.add(n);
+        }
+        return false;
+    }
+
+    // T: O(n log n), S: O(1)
+    public boolean containsDuplicateSort(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                return true;
+            }
         }
         return false;
     }

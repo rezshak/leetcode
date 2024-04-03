@@ -2,7 +2,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 // T: O(n), S: O(n)
 func containsDuplicate(nums []int) bool {
@@ -16,9 +19,22 @@ func containsDuplicate(nums []int) bool {
 	return false
 }
 
+// T: O(n log n), S: O(1)
+func containsDuplicateSort(nums []int) bool {
+	sort.Ints(nums)
+	for i := 1; i < len(nums); i++ {
+		if nums[i] == nums[i-1] {
+			return true
+		}
+	}
+	return false
+}
+
 func main() {
 	var nums1 = []int{1, 2, 3, 1}
 	fmt.Println(containsDuplicate(nums1))
+	fmt.Println(containsDuplicateSort(nums1))
 	var nums2 = []int{1, 2, 3, 4}
 	fmt.Println(containsDuplicate(nums2))
+	fmt.Println(containsDuplicateSort(nums2))
 }
