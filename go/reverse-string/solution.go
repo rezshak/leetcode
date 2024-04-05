@@ -14,8 +14,21 @@ func reverseString(s []byte) {
 	}
 }
 
+// T: O(n), S: O(n)
+func reverseStringStack(s []byte) {
+	stack := make([]byte, len(s))
+	copy(stack, s)
+	for i := 0; i < len(s); i++ {
+		s[i] = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+	}
+}
+
 func main() {
-	s := []byte("hello")
-	reverseString(s)
-	fmt.Println(string(s)) // olleh
+	s1 := []byte("hello")
+	reverseString(s1)
+	fmt.Println(string(s1)) // olleh
+	s2 := []byte("Hannah")
+	reverseStringStack(s2)
+	fmt.Println(string(s2)) // hannaH
 }
