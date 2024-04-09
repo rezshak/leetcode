@@ -9,22 +9,25 @@ class Solution {
     // T: O(n), S: O(n)
     public String simplifyPath(String path) {
         var stack = new Stack<String>();
-        var arr = path.split("/");
-        for (String p : arr) {
+        var paths = path.split("/");
+        for (var p : paths) {
+            if (p.isEmpty() || p.equals(".")) {
+                continue;
+            }
             if (p.equals("..")) {
                 if (!stack.isEmpty()) {
                     stack.pop();
                 }
-            } else if (!p.isEmpty() && !p.equals(".")) {
+            } else {
                 stack.push(p);
             }
         }
-        var result = new StringBuilder();
-        for (String dir : stack) {
-            result.append("/");
-            result.append(dir);
+        var sb = new StringBuilder();
+        for (var p : stack) {
+            sb.append("/");
+            sb.append(p);
         }
-        return result.length() == 0 ? "/" : result.toString();
+        return sb.isEmpty() ? "/" : sb.toString();
     }
 
     public static void main(String[] args) {

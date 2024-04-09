@@ -10,12 +10,16 @@ import (
 // T: O(n), S: O(n)
 func simplifyPath(path string) string {
 	stack := make([]string, 0)
-	for _, p := range strings.Split(path, "/") {
+	paths := strings.Split(path, "/")
+	for _, p := range paths {
+		if len(p) == 0 || p == "." {
+			continue
+		}
 		if p == ".." {
-			if len(stack) > 0 {
+			if len(stack) != 0 {
 				stack = stack[:len(stack)-1]
 			}
-		} else if p != "" && p != "." {
+		} else {
 			stack = append(stack, p)
 		}
 	}
