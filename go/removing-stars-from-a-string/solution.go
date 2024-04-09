@@ -8,9 +8,11 @@ import "fmt"
 func removeStars(s string) string {
 	stack := make([]rune, 0)
 	for _, ch := range s {
-		if ch == '*' && len(stack) > 0 {
-			stack = stack[:len(stack)-1]
-		} else if ch != '*' {
+		if ch == '*' {
+			if len(stack) != 0 {
+				stack = stack[:len(stack)-1]
+			}
+		} else {
 			stack = append(stack, ch)
 		}
 	}

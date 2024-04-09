@@ -7,25 +7,23 @@ import java.util.Stack;
 class Solution {
 
     // T: O(n), S: O(n)
-    public String removeStars(String s) {
+    public String removeStars(String str) {
         var stack = new Stack<Character>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (ch == '*' && !stack.isEmpty()) {
-                stack.pop();
-            } else if (ch != '*') {
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch == '*') {
+                if (!stack.isEmpty()) {
+                    stack.pop();
+                }
+            } else {
                 stack.push(ch);
             }
         }
-        return stackToString(stack);
-    }
-
-    private String stackToString(Stack<Character> stack) {
-        var strArr = new char[stack.size()];
-        for (int i = strArr.length - 1; i >= 0; i--) {
-            strArr[i] = stack.pop();
+        var sb = new StringBuilder();
+        for (var ch : stack) {
+            sb.append(ch);
         }
-        return new String(strArr);
+        return sb.toString();
     }
 
     public static void main(String[] args) {
