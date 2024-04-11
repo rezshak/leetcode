@@ -7,7 +7,8 @@ class Solution {
     // T: O(n), S: O(1)
     public int longestOnes(int[] nums, int k) {
         int len = nums.length;
-        int left = 0, right = 0, zeros = 0;
+        int left = 0, right = 0;
+        int max = 0, zeros = 0;
         while (right < len) {
             if (nums[right] == 0) {
                 zeros++;
@@ -19,8 +20,9 @@ class Solution {
                 }
                 left++;
             }
+            max = Math.max(max, right - left);
         }
-        return right - left;
+        return max;
     }
 
     public static void main(String[] args) {

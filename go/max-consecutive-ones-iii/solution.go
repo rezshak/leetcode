@@ -7,7 +7,7 @@ import "fmt"
 // T: O(n), S: O(1)
 func longestOnes(nums []int, k int) int {
 	len := len(nums)
-	left, right, zeros := 0, 0, 0
+	left, right, zeros, max := 0, 0, 0, 0
 	for right < len {
 		if nums[right] == 0 {
 			zeros++
@@ -19,8 +19,11 @@ func longestOnes(nums []int, k int) int {
 			}
 			left++
 		}
+		if right-left > max {
+			max = right - left
+		}
 	}
-	return right - left
+	return max
 }
 
 func main() {
