@@ -6,13 +6,13 @@ import "fmt"
 
 // T: O(n), S: O(n)
 func twoSum(nums []int, target int) []int {
-	m := make(map[int]int)
+	idxMap := make(map[int]int)
 	for idx, num := range nums {
 		diff := target - num
-		if val, ok := m[diff]; ok {
-			return []int{val, idx}
+		if i, ok := idxMap[diff]; ok {
+			return []int{i, idx}
 		}
-		m[num] = idx
+		idxMap[num] = idx
 	}
 	return nil
 }
