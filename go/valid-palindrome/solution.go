@@ -10,20 +10,20 @@ import (
 
 // T: O(n), S: O(1)
 func isPalindrome(s string) bool {
-	s = strings.ToLower(s)
+	s = strings.ToLower(strings.TrimSpace(s))
 	left, right := 0, len(s)-1
 	for left < right {
-		lch := rune(s[left])
-		rch := rune(s[right])
-		if !unicode.IsLetter(lch) && !unicode.IsDigit(lch) {
+		leftChar := rune(s[left])
+		rightChar := rune(s[right])
+		if !unicode.IsLetter(leftChar) && !unicode.IsDigit(leftChar) {
 			left++
 			continue
 		}
-		if !unicode.IsLetter(rch) && !unicode.IsDigit(rch) {
+		if !unicode.IsLetter(rightChar) && !unicode.IsDigit(rightChar) {
 			right--
 			continue
 		}
-		if lch != rch {
+		if leftChar != rightChar {
 			return false
 		}
 		left++
