@@ -7,12 +7,12 @@ import "fmt"
 // T: O(n), S: O(n)
 func twoSum(nums []int, target int) []int {
 	idxMap := make(map[int]int)
-	for idx, num := range nums {
-		diff := target - num
-		if i, ok := idxMap[diff]; ok {
-			return []int{i, idx}
+	for i, n := range nums {
+		diff := target - n
+		if idx, ok := idxMap[diff]; ok {
+			return []int{idx, i}
 		}
-		idxMap[num] = idx
+		idxMap[n] = i
 	}
 	return nil
 }
