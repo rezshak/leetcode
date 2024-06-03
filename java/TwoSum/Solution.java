@@ -9,14 +9,13 @@ class Solution {
 
     // T: O(n), S: O(n)
     public int[] twoSum(int[] nums, int target) {
-        var map = new HashMap<Integer, Integer>(); // num, idx
+        var idxMap = new HashMap<Integer, Integer>(); // num, idx
         for (var i = 0; i < nums.length; i++) {
-            var curr = nums[i];
-            var diff = target - curr;
-            if (map.containsKey(diff)) {
-                return new int[] { map.get(diff), i };
+            var diff = target - nums[i];
+            if (idxMap.containsKey(diff)) {
+                return new int[] { idxMap.get(diff), i };
             }
-            map.put(curr, i);
+            idxMap.put(nums[i], i);
         }
 
         return new int[] { 0, 0 };
