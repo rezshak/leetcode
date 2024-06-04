@@ -9,33 +9,28 @@ import (
 
 // T: O(n^2), S: O(n)
 func threeSum(nums []int) [][]int {
-	set := make(map[[3]int]bool)
 	sort.Ints(nums)
-	n := len(nums)
-	for i := 0; i < n-2; i++ {
-		num1 := nums[i]
-		left, right := i+1, n-1
+	set := make(map[[3]int]bool)
+	result := make([][]int, 0)
+	for i, n1 := range nums {
+		left, right := i+1, len(nums)-1
 		for left < right {
-			num2 := nums[left]
-			num3 := nums[right]
-			currSum := num1 + num2 + num3
-			if currSum == 0 {
-				triplet := [3]int{num1, num2, num3}
-				set[triplet] = true
+			n2, n3 := nums[left], nums[right]
+			sum := n1 + n2 + n3
+			if sum == 0 {
+				triplet := [3]int{n1, n2, n3}
+				if _, found := set[triplet]; !found {
+					set[triplet] = true
+					result = append(result, triplet[:])
+				}
 				left++
 				right--
-				continue
-			}
-			if currSum < 0 {
+			} else if sum < 0 {
 				left++
-			} else if currSum > 0 {
+			} else {
 				right--
 			}
 		}
-	}
-	result := make([][]int, 0, len(set))
-	for key := range set {
-		result = append(result, key[:])
 	}
 	return result
 }
@@ -51,8 +46,8 @@ func threeSumOpt(nums []int) [][]int {
 		}
 		left, right := i+1, n-1
 		for left < right {
-			currSum := nums[i] + nums[left] + nums[right]
-			if currSum == 0 {
+			sum := nums[i] + nums[left] + nums[right]
+			if sum == 0 {
 				result = append(result, []int{nums[i], nums[left], nums[right]})
 				for left < right && nums[left] == nums[left+1] {
 					left++
@@ -62,7 +57,7 @@ func threeSumOpt(nums []int) [][]int {
 				}
 				left++
 				right--
-			} else if currSum < 0 {
+			} else if sum < 0 {
 				left++
 			} else {
 				right--
