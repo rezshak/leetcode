@@ -21,20 +21,18 @@ class Solution {
 
     // T: O(n), S: O(1)
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        var fake = new ListNode(-1, head);
+        var left = fake;
         var right = head;
         for (int i = 0; i < n && right != null; i++) {
             right = right.next;
         }
-        if (right == null) {
-            return head.next;
-        }
-        var left = head;
-        while (right.next != null) {
+        while (right != null) {
             right = right.next;
             left = left.next;
         }
         left.next = left.next.next;
-        return head;
+        return fake.next;
     }
 
     void printList(ListNode head) {
@@ -57,10 +55,12 @@ class Solution {
         head1.next.next.next = new ListNode(4);
         head1.next.next.next.next = new ListNode(5);
         sol.printList(head1);
-        sol.printList(sol.removeNthFromEnd(head1, 2)); // [ 1 2 3 5 ]
+        var newHead1 = sol.removeNthFromEnd(head1, 2);
+        sol.printList(newHead1); // [ 1 2 3 5 ]
         var head2 = new ListNode(1);
         sol.printList(head2);
-        sol.printList(sol.removeNthFromEnd(head2, 1)); // [ ]
+        var newHead2 = sol.removeNthFromEnd(head2, 1);
+        sol.printList(newHead2); // [ ]
     }
 
 }

@@ -12,21 +12,19 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// T: O(n), S: O(1)
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	right := head
+	fake := &ListNode{Val: -1, Next: head}
+	left, right := fake, head
 	for i := 0; i < n && right != nil; i++ {
 		right = right.Next
 	}
-	if right == nil {
-		return head.Next
-	}
-	left := head
-	for right.Next != nil {
+	for right != nil {
 		right = right.Next
 		left = left.Next
 	}
 	left.Next = left.Next.Next
-	return head
+	return fake.Next
 }
 
 func printList(head *ListNode) {
