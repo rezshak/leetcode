@@ -3,7 +3,6 @@
 package SlidingWindowMaximum;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 
@@ -32,23 +31,19 @@ class Solution {
 
     // T: O(nk), S: O(n)
     public int[] maxSlidingWindowBrute(int[] nums, int k) {
-        int l = 0, r = k, n = nums.length;
-        var result = new ArrayList<Integer>();
-        while (r <= n) {
-            int max = maxBrute(nums, l++, r++);
-            result.add(max);
+        int len = nums.length - k + 1;
+        var result = new int[len];
+        int p = 0;
+        for (int i = 0; i < len; i++) {
+            int winMax = maxBrute(nums, i, i + k);
+            result[p++] = winMax;
         }
-        int[] finalResult = new int[result.size()];
-        for (int i = 0; i < result.size(); i++) {
-            finalResult[i] = result.get(i);
-        }
-        return finalResult;
+        return result;
     }
-
-    private int maxBrute(int[] nums, int l, int r) {
+    private int maxBrute(int[] nums, int beg, int end) {
         int max = Integer.MIN_VALUE;
-        while (l < r) {
-            max = Math.max(max, nums[l++]);
+        for (int i = beg; i < end; i++) {
+            max = Math.max(max, nums[i]);
         }
         return max;
     }

@@ -3,6 +3,7 @@ package main
 import (
 	"container/list"
 	"fmt"
+	"math"
 )
 
 // T: O(n), S: O(n)
@@ -29,24 +30,22 @@ func maxSlidingWindow(nums []int, k int) []int {
 
 // T: O(nk), S: O(n)
 func maxSlidingWindowBrute(nums []int, k int) []int {
-	l, r, n := 0, k, len(nums)
-	result := []int{}
-	for r <= n {
-		max := maxBrute(nums, l, r)
-		result = append(result, max)
-		l++
-		r++
+	len := len(nums) - k + 1
+	res := make([]int, len)
+	p := 0
+	for i := 0; i < len; i++ {
+		winMax := maxBrute(nums, i, i+k)
+		res[p] = winMax
+		p++
 	}
-	return result
+	return res
 }
-
-func maxBrute(nums []int, l int, r int) int {
-	max := -1 << 31
-	for l < r {
-		if nums[l] > max {
-			max = nums[l]
+func maxBrute(nums []int, beg, end int) int {
+	max := math.MinInt32
+	for i := beg; i < end; i++ {
+		if nums[i] > max {
+			max = nums[i]
 		}
-		l++
 	}
 	return max
 }
