@@ -3,8 +3,11 @@
 package RepeatedDnaSequences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 class Solution {
 
@@ -24,12 +27,58 @@ class Solution {
         return result;
     }
 
+    private static final Map<Character, Integer> MAP = Map.of(
+            'A', 0,
+            'C', 1,
+            'G', 2,
+            'T', 3);
+
+    // T: O(n), S: O(n)
+    public List<String> findRepeatedDnaSequencesRabinKarp(String s) {
+        int len = s.length();
+        if (len < K) {
+            return Collections.emptyList();
+        }
+
+        var arr = new int[len];
+        for (int i = 0; i < len; i++) {
+            arr[i] = MAP.get(s.charAt(i));
+        }
+
+        int a = 4;
+        int currHash = 0;
+
+        var seen = new HashSet<Integer>();
+        var result = new HashSet<String>();
+
+        for (int i = 0; i < len - K + 1; i++) {
+            if (i == 0) {
+                for (int j = 0; j < K; j++) {
+                    currHash += arr[j] * (int) Math.pow(a, K - j - 1);
+                }
+            } else {
+                int prevHash = currHash;
+                currHash = ((prevHash - arr[i - 1] * (int) Math.pow(a, K - 1)) * a)
+                        + arr[i + K - 1];
+            }
+
+            if (seen.contains(currHash)) {
+                result.add(s.substring(i, i + K));
+            }
+
+            seen.add(currHash);
+        }
+        return new ArrayList<>(result);
+    }
+
     public static void main(String[] args) {
         var sol = new Solution();
         var s1 = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
         var s2 = "AAAAAAAAAAAAA";
         System.out.println(sol.findRepeatedDnaSequences(s1));
         System.out.println(sol.findRepeatedDnaSequences(s2));
+        System.out.println(sol.findRepeatedDnaSequencesRabinKarp(s1));
+        System.out.println(sol.findRepeatedDnaSequencesRabinKarp(s2));
     }
 
 }
