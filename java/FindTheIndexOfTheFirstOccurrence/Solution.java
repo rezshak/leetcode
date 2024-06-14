@@ -30,8 +30,7 @@ class Solution {
         System.out.println(sol.strStr("sadbutsad", "sad")); // 0
         System.out.println(sol.strStr("leetcode", "leeto")); // -1
         System.out.println(sol.strStr("mississippi", "issip")); // 4
-        System.out.println(sol.strStr("mississippi", "")); // -1
-        System.out.println("mississippi".indexOf("")); // -1
+        System.out.println(sol.strStr("mississippi", "")); // 0
     }
 
 }
