@@ -2,6 +2,8 @@
 
 package RemoveDuplicatesFromSortedArray;
 
+import java.util.HashSet;
+
 class Solution {
 
     // T: O(n), S: O(1)
@@ -13,6 +15,21 @@ class Solution {
             }
         }
         return k + 1;
+    }
+
+    // T: O(n), S: O(n)
+    public int removeDuplicates2(int[] nums) {
+        var set = new HashSet<Integer>();
+        int k = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int n = nums[i];
+            if (!set.contains(n)) {
+                nums[k] = n;
+                k++;
+            }
+            set.add(n);
+        }
+        return k;
     }
 
     public static void main(String[] args) {

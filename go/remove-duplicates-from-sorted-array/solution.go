@@ -16,6 +16,19 @@ func removeDuplicates(nums []int) int {
 	return k + 1
 }
 
+func removeDuplicates2(nums []int) int {
+	set := make(map[int]bool)
+	k := 0
+	for i := 1; i < len(nums); i++ {
+		if !set[nums[i]] {
+			k++
+			nums[k] = nums[i]
+		}
+
+	}
+	return k + 1;
+}
+
 func main() {
 	nums1 := []int{1, 1, 2}
 	nums2 := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
