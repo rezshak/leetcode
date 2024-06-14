@@ -16,17 +16,19 @@ func removeDuplicates(nums []int) int {
 	return k + 1
 }
 
+// T: O(n), S: O(n)
 func removeDuplicates2(nums []int) int {
 	set := make(map[int]bool)
 	k := 0
-	for i := 1; i < len(nums); i++ {
-		if !set[nums[i]] {
+	for i := 0; i < len(nums); i++ {
+		n := nums[i]
+		if !set[n] {
+			nums[k] = n
 			k++
-			nums[k] = nums[i]
 		}
-
+		set[n] = true
 	}
-	return k + 1;
+	return k
 }
 
 func main() {
