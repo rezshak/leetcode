@@ -1,2 +1,3 @@
-# leetcode
-LeetCode solutions in Java and Go
+# LeetCode solutions
+
+https://leetcode.com/rezshak/
