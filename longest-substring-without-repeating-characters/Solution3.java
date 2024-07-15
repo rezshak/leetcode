@@ -6,21 +6,19 @@ class Solution3 {
 
     // T: O(n), S: O(min(n, m))
     public int lengthOfLongestSubstring(String s) {
-        var beg = 0;
-        var end = 0;
-        var max = 0;
         var set = new HashSet<Character>();
-        while (end < s.length()) {
-            if (!set.contains(s.charAt(end))) {
-                set.add(s.charAt(end));
-                end++;
+        int left = 0, right = 0, ans = 0;
+        while (right < s.length()) {
+            if (!set.contains(s.charAt(right))) {
+                set.add(s.charAt(right));
+                right++;
             } else {
-                set.remove(s.charAt(beg));
-                beg++;
+                set.remove(s.charAt(left));
+                left++;
             }
-            max = Math.max(max, end - beg);
+            ans = Math.max(ans, set.size());
         }
-        return max;
+        return ans;
     }
 
     public static void main(String[] args) {
