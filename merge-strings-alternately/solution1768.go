@@ -28,11 +28,11 @@ func mergeAlternately(word1 string, word2 string) string {
 func main() {
 	w1 := "abc"
 	w2 := "pqr"
-	fmt.Println(mergeAlternately(w1, w2))
+	fmt.Println(mergeAlternately(w1, w2)) // "apbqcr"
 	w1 = "ab"
 	w2 = "pqrs"
-	fmt.Println(mergeAlternately(w1, w2))
+	fmt.Println(mergeAlternately(w1, w2)) // "apbqrs"
 	w1 = "abcd"
 	w2 = "pq"
-	fmt.Println(mergeAlternately(w1, w2))
+	fmt.Println(mergeAlternately(w1, w2)) // "apbqcd"
 }

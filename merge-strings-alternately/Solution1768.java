@@ -22,13 +22,13 @@ class Solution1768 {
         var sol = new Solution1768();
         var w1 = "abc";
         var w2 = "pqr";
-        System.out.println(sol.mergeAlternately(w1, w2));
+        System.out.println(sol.mergeAlternately(w1, w2)); // "apbqcr"
         w1 = "ab";
         w2 = "pqrs";
-        System.out.println(sol.mergeAlternately(w1, w2));
+        System.out.println(sol.mergeAlternately(w1, w2)); // "apbqrs"
         w1 = "abcd";
         w2 = "pq";
-        System.out.println(sol.mergeAlternately(w1, w2));
+        System.out.println(sol.mergeAlternately(w1, w2)); // "apbqcd"
     }
 
 }
