@@ -3,16 +3,6 @@
 import java.util.HashSet;
 import java.util.Set;
 
-class TreeNode {
-    int val;
-    TreeNode left, right;
-
-    TreeNode(int val) {
-        this.val = val;
-        left = right = null;
-    }
-}
-
 class Solution653 {
 
     // T: O(n), S: O(n)
