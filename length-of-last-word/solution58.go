@@ -4,14 +4,15 @@ package main
 
 import "fmt"
 
+// T: O(n), S: O(1)
 func lengthOfLastWord(s string) int {
-	right := len(s) - 1
-	for rune(s[right]) == ' ' {
-		right--
+	r := len(s) - 1
+	for r >= 0 && rune(s[r]) == ' ' {
+		r--
 	}
 	count := 0
-	for right >= 0 && rune(s[right]) != ' ' {
-		right--
+	for r >= 0 && rune(s[r]) != ' ' {
+		r--
 		count++
 	}
 	return count
@@ -20,6 +21,8 @@ func lengthOfLastWord(s string) int {
 func main() {
 	s1 := "Hello World"
 	s2 := "   fly me   to   the moon  "
-	fmt.Println(lengthOfLastWord(s1))
-	fmt.Println(lengthOfLastWord(s2))
+	s3 := "luffy is still joyboy"
+	fmt.Println(lengthOfLastWord(s1)) // 5
+	fmt.Println(lengthOfLastWord(s2)) // 4
+	fmt.Println(lengthOfLastWord(s3)) // 6
 }

@@ -2,17 +2,16 @@
 
 class Solution58 {
 
+    // T: O(n), S: O(1)
     public int lengthOfLastWord(String s) {
-        int len = s.length(), right = len - 1;
-        // skip trailing spaces
-        while (s.charAt(right) == ' ') {
-            right--;
-            continue;
+        int r = s.length() - 1;
+        while (r >= 0 && s.charAt(r) == ' ') {
+            r--;
         }
         int count = 0;
-        while (right >= 0 && s.charAt(right) != ' ') {
+        while (r >= 0 && s.charAt(r) != ' ') {
             count++;
-            right--;
+            r--;
         }
         return count;
     }
@@ -21,8 +20,10 @@ class Solution58 {
         var sol = new Solution58();
         var s1 = "Hello World";
         var s2 = "   fly me   to   the moon  ";
-        System.out.println(sol.lengthOfLastWord(s1));
-        System.out.println(sol.lengthOfLastWord(s2));
+        var s3 = "luffy is still joyboy";
+        System.out.println(sol.lengthOfLastWord(s1)); // 5
+        System.out.println(sol.lengthOfLastWord(s2)); // 4
+        System.out.println(sol.lengthOfLastWord(s3)); // 6
     }
 
 }
