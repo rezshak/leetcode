@@ -10,7 +10,7 @@ class Solution56 {
         var merged = new ArrayList<int[]>();
         merged.add(intervals[0]);
         for (int i = 1; i < intervals.length; i++) {
-            var prevInterval = merged.getLast();
+            var prevInterval = merged.get(merged.size() - 1);
             var currInterval = intervals[i];
             if (currInterval[0] <= prevInterval[1]) {
                 prevInterval[1] = Math.max(prevInterval[1], currInterval[1]);
