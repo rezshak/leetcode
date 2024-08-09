@@ -18,27 +18,30 @@ class Solution1502 {
 
     // T: O(n), S: O(n)
     public boolean canMakeArithmeticProgressionSet(int[] arr) {
-        int minVal = Integer.MAX_VALUE, maxVal = Integer.MIN_VALUE;
-        int n = arr.length;
-        for (int num : arr) {
-            minVal = Math.min(minVal, num);
-            maxVal = Math.max(maxVal, num);
+        var set = new HashSet<Integer>();
+        int minVal = Integer.MAX_VALUE;
+        int maxVal = Integer.MIN_VALUE;
+        for (int n : arr) {
+            minVal = Math.min(minVal, n);
+            maxVal = Math.max(maxVal, n);
+            set.add(n);
         }
-        if (maxVal - minVal == 0) {
+        if (set.size() == 1) {
             return true;
         }
-        if ((maxVal - minVal) % (n - 1) != 0) {
+        if (set.size() != arr.length) {
             return false;
         }
-        int diff = (maxVal - minVal) / (n - 1);
-        var set = new HashSet<Integer>();
-        for (int num : arr) {
-            if ((num - minVal) % diff != 0) {
+        int diff = (maxVal - minVal) / (arr.length - 1);
+        if (diff == 0) {
+            return true;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (!set.contains(minVal + i * diff)) {
                 return false;
             }
-            set.add(num);
         }
-        return set.size() == n;
+        return true;
     }
 
     public static void main(String[] args) {

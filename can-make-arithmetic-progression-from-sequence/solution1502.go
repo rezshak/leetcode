@@ -22,31 +22,34 @@ func canMakeArithmeticProgression(arr []int) bool {
 
 // T: O(n), S: O(n)
 func canMakeArithmeticProgressionSet(arr []int) bool {
-	minVal, maxVal := math.MaxInt32, math.MinInt32
-	n := len(arr)
-	for _, num := range arr {
-		if num < minVal {
-			minVal = num
+	set := make(map[int]bool)
+	minVal := math.MaxInt32
+	maxVal := math.MinInt32
+	for _, n := range arr {
+		if n < minVal {
+			minVal = n
 		}
-		if num > maxVal {
-			maxVal = num
+		if n > maxVal {
+			maxVal = n
 		}
+		set[n] = true
 	}
-	if maxVal-minVal == 0 {
+	if len(set) == 1 {
 		return true
 	}
-	if (maxVal-minVal)%(n-1) != 0 {
+	if len(set) != len(arr) {
 		return false
 	}
-	diff := (maxVal - minVal) / (n - 1)
-	set := make(map[int]bool)
-	for _, num := range arr {
-		if (num-minVal)%diff != 0 {
+	diff := (maxVal - minVal) / (len(arr) - 1)
+	if diff == 0 {
+		return true
+	}
+	for i := 0; i < len(arr); i++ {
+		if _, exists := set[minVal+i*diff]; !exists {
 			return false
 		}
-		set[num] = true
 	}
-	return len(set) == n
+	return true
 }
 
 func main() {
