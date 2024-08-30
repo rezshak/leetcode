@@ -18,6 +18,13 @@
             "mainClass": "${file}",
             "console": "internalConsole",
             "args": ""
-        }
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
     ]
 }
