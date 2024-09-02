@@ -7,7 +7,7 @@ import (
 	"sort"
 )
 
-// T: O(n*k log k), S: O(n)
+// T: O(nk log k), S: O(nk)
 func groupAnagrams(strs []string) [][]string {
 	dict := make(map[string][]string)
 	for _, str := range strs {

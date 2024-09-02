@@ -4,12 +4,15 @@ import java.util.*;
 
 class Solution49 {
 
-    // T: O(n*k log k), S: O(n)
+    // T: O(nk log k), S: O(nk)
     public List<List<String>> groupAnagrams(String[] strs) {
         var map = new HashMap<String, List<String>>();
         for (var str : strs) {
             var key = makeKey(str);
-            map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<String>());
+            }
+            map.get(key).add(str);
         }
         return new ArrayList<>(map.values());
     }
