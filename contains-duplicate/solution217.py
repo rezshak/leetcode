@@ -18,7 +18,7 @@ class Solution217:
         return False
 
 
-def main():
+def main() -> None:
     sol = Solution217()
     nums1 = [1, 2, 3, 1]
     nums2 = [1, 2, 3, 4]
