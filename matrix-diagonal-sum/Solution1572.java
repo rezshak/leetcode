@@ -4,18 +4,15 @@ class Solution1572 {
 
     // T: O(n), S: O(1)
     public int diagonalSum(int[][] mat) {
-        int rows = mat.length, cols = mat[0].length;
-        int sum = 0;
-        for (int r = 0, c = 0; r < rows && c < cols; r++, c++) {
-            sum += mat[r][c];
+        int n = mat.length;
+        int diagSum = 0, antiDiagSum = 0;
+        for (int i = 0; i < n; i++) {
+            diagSum += mat[i][i];
+            if (i != n - 1 - i) {
+                antiDiagSum += mat[i][n - i - 1];
+            }
         }
-        for (int r = 0, c = cols - 1; r < rows && c >= 0; r++, c--) {
-            sum += mat[r][c];
-        }
-        if (rows % 2 == 1) {
-            sum -= mat[rows / 2][cols / 2];
-        }
-        return sum;
+        return diagSum + antiDiagSum;
     }
 
     public static void main(String[] args) {

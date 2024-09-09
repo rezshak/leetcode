@@ -6,18 +6,15 @@ import "fmt"
 
 // T: O(n), S: O(1)
 func diagonalSum(mat [][]int) int {
-	rows, cols := len(mat), len(mat[0])
-	sum := 0
-	for r, c := 0, 0; r < rows && c < cols; r, c = r+1, c+1 {
-		sum += mat[r][c]
+	n := len(mat)
+	diagSum, antiDiagSum := 0, 0
+	for i := range mat {
+		diagSum += mat[i][i]
+		if i != n-1-i {
+			antiDiagSum += mat[i][n-1-i]
+		}
 	}
-	for r, c := 0, cols-1; r < rows && c >= 0; r, c = r+1, c-1 {
-		sum += mat[r][c]
-	}
-	if rows%2 == 1 {
-		sum -= mat[rows/2][cols/2]
-	}
-	return sum
+	return antiDiagSum + diagSum
 }
 
 func main() {
