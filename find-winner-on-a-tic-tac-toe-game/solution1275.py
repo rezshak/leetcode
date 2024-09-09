@@ -29,9 +29,13 @@ class Solution1275:
         return "Draw" if n == N * N else "Pending"
 
 
-if __name__ == "__main__":
+def main() -> None:
     sol = Solution1275()
     moves1 = [[0, 0], [2, 0], [1, 1], [2, 1], [2, 2]]
     moves2 = [[0, 0], [1, 1], [0, 1], [0, 2], [1, 0], [2, 0]]
     print(sol.tictactoe(moves1))  # A
     print(sol.tictactoe(moves2))  # B
+
+
+if __name__ == "__main__":
+    main()
