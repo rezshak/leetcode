@@ -4,7 +4,7 @@ class Solution151 {
 
     // T: O(n), S: O(n)
     public String reverseWords(String s) {
-        var arr = s.trim().split("\s+");
+        var arr = s.trim().split("\\s+");
         int left = 0, right = arr.length - 1;
         while (left < right) {
             var temp = arr[left];
