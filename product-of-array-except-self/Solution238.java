@@ -7,43 +7,45 @@ class Solution238 {
     // T: O(n), S: O(n)
     public int[] productExceptSelf(int[] nums) {
         int n = nums.length;
-        var ans = new int[n];
-        var left = new int[n];
-        var right = new int[n];
-        left[0] = 1;
-        for (int i = 1; i < n; i++) {
-            left[i] = nums[i - 1] * left[i - 1];
-        }
-        right[n - 1] = 1;
-        for (int i = n - 2; i >= 0; i--) {
-            right[i] = nums[i + 1] * right[i + 1];
-        }
+        var prefix = new int[n];
+        int left = 1;
         for (int i = 0; i < n; i++) {
-            ans[i] = left[i] * right[i];
+            prefix[i] = left;
+            left *= nums[i];
         }
-        return ans;
+        var postfix = new int[n];
+        int right = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            postfix[i] = right;
+            right *= nums[i];
+        }
+        var output = new int[n];
+        for (int i = 0; i < n; i++) {
+            output[i] = prefix[i] * postfix[i];
+        }
+        return output;
     }
 
     // T: O(n), S: O(1)
     public int[] productExceptSelfOpt(int[] nums) {
         int n = nums.length;
-        var ans = new int[n];
-        ans[0] = 1;
-        for (int i = 1; i < n; i++) {
-            ans[i] = nums[i - 1] * ans[i - 1];
+        var output = new int[n];
+        int right = 1, left = 1;
+        for (int i = 0; i < n; i++) {
+            output[i] = left;
+            left *= nums[i];
         }
-        int right = 1;
         for (int i = n - 1; i >= 0; i--) {
-            ans[i] *= right;
+            output[i] *= right;
             right *= nums[i];
         }
-        return ans;
+        return output;
     }
 
     public static void main(String[] args) {
         var sol = new Solution238();
-        int[] nums1 = { 1, 2, 3, 4 };
-        int[] nums2 = { -1, 1, 0, -3, 3 };
+        var nums1 = new int[] { 1, 2, 3, 4 };
+        var nums2 = new int[] { -1, 1, 0, -3, 3 };
         System.out.println(Arrays.toString(sol.productExceptSelf(nums1))); // [24, 12, 8, 6]
         System.out.println(Arrays.toString(sol.productExceptSelfOpt(nums1))); // [24, 12, 8, 6]
         System.out.println(Arrays.toString(sol.productExceptSelf(nums2))); // [0, 0, 9, 0, 0]

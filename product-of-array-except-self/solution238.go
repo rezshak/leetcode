@@ -9,37 +9,39 @@ import (
 // T: O(n), S: O(n)
 func productExceptSelf(nums []int) []int {
 	n := len(nums)
-	ans := make([]int, n)
-	left := make([]int, n)
-	right := make([]int, n)
-	left[0] = 1
-	for i := 1; i < n; i++ {
-		left[i] = nums[i-1] * left[i-1]
-	}
-	right[n-1] = 1
-	for i := n - 2; i >= 0; i-- {
-		right[i] = nums[i+1] * right[i+1]
-	}
+	prefix := make([]int, n)
+	left := 1
 	for i := 0; i < n; i++ {
-		ans[i] = left[i] * right[i]
+		prefix[i] = left
+		left *= nums[i]
 	}
-	return ans
+	postfix := make([]int, n)
+	right := 1
+	for i := n - 1; i >= 0; i-- {
+		postfix[i] = right
+		right *= nums[i]
+	}
+	output := make([]int, n)
+	for i := 0; i < n; i++ {
+		output[i] = prefix[i] * postfix[i]
+	}
+	return output
 }
 
 // T: O(n), S: O(1)
 func productExceptSelfOpt(nums []int) []int {
 	n := len(nums)
-	ans := make([]int, n)
-	ans[0] = 1
-	for i := 1; i < n; i++ {
-		ans[i] = nums[i-1] * ans[i-1]
+	output := make([]int, n)
+	right, left := 1, 1
+	for i := 0; i < n; i++ {
+		output[i] = left
+		left *= nums[i]
 	}
-	right := 1
 	for i := n - 1; i >= 0; i-- {
-		ans[i] *= right
+		output[i] *= right
 		right *= nums[i]
 	}
-	return ans
+	return output
 }
 
 func main() {
