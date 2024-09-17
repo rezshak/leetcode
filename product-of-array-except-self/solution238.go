@@ -32,7 +32,7 @@ func productExceptSelf(nums []int) []int {
 func productExceptSelfOpt(nums []int) []int {
 	n := len(nums)
 	output := make([]int, n)
-	right, left := 1, 1
+	left, right := 1, 1
 	for i := 0; i < n; i++ {
 		output[i] = left
 		left *= nums[i]

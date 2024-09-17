@@ -30,7 +30,7 @@ class Solution238 {
     public int[] productExceptSelfOpt(int[] nums) {
         int n = nums.length;
         var output = new int[n];
-        int right = 1, left = 1;
+        int left = 1, right = 1;
         for (int i = 0; i < n; i++) {
             output[i] = left;
             left *= nums[i];

@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/product-of-array-except-self/
 
 from typing import List
 
@@ -29,7 +30,7 @@ class Solution238:
     def productExceptSelfOpt(self, nums: List[int]) -> List[int]:
         n = len(nums)
         output = [1] * n
-        right, left = 1, 1
+        left, right = 1, 1
 
         for i in range(n):
             output[i] = left
