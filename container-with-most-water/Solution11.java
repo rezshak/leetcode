@@ -3,23 +3,20 @@
 class Solution11 {
 
     // T: O(n), S: O(1)
-    public int maxArea(int[] height) {
-        int maxArea = 0;
-        int start = 0;
-        int end = height.length - 1;
-
-        while (start < end) {
-            int width = end - start;
-            maxArea = Math.max(maxArea, Math.min(height[start], height[end]) * width);
-
-            if (height[start] <= height[end]) {
-                start++;
+    public int maxArea(int[] heights) {
+        int left = 0, right = heights.length - 1;
+        int result = 0;
+        while (left < right) {
+            int width = right - left;
+            int area = width * Math.min(heights[left], heights[right]);
+            result = Math.max(result, area);
+            if (heights[left] < heights[right]) {
+                left++;
             } else {
-                end--;
+                right--;
             }
         }
-
-        return maxArea;
+        return result;
     }
 
     public static void main(String[] args) {
