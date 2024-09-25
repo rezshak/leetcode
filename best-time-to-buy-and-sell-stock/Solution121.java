@@ -4,16 +4,17 @@ class Solution121 {
 
     // T: O(n), S: O(1)
     public int maxProfit(int[] prices) {
-        int n = prices.length, maxProfit = 0;
-        for (int buy = 0, sell = 1; sell < n; sell++) {
-            if (prices[buy] < prices[sell]) {
-                int currProfit = prices[sell] - prices[buy];
-                maxProfit = Math.max(maxProfit, currProfit);
+        int l = 0, r = 1, n = prices.length;
+        int res = 0;
+        while (r < n) {
+            if (prices[l] < prices[r]) {
+                res = Math.max(res, prices[r] - prices[l]);
             } else {
-                buy = sell;
+                l = r;
             }
+            r++;
         }
-        return maxProfit;
+        return res;
     }
 
     public static void main(String[] args) {

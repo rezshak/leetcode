@@ -8,16 +8,17 @@ import (
 
 // T: O(n), S: O(1)
 func maxProfit(prices []int) int {
-	n, maxProfit := len(prices), 0
-	for buy, sell := 0, 1; sell < n; sell++ {
-		if prices[buy] < prices[sell] {
-			currProfit := prices[sell] - prices[buy]
-			maxProfit = max(maxProfit, currProfit)
+	l, r, n := 0, 1, len(prices)
+	res := 0
+	for r < n {
+		if prices[l] < prices[r] {
+			res = max(res, prices[r]-prices[l])
 		} else {
-			buy = sell
+			l = r
 		}
+		r++
 	}
-	return maxProfit
+	return res
 }
 
 func main() {
