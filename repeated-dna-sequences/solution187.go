@@ -9,21 +9,27 @@ import (
 
 const K = 10
 
-// T: O(n), S: O(n)
+// T: O(n*k), S: O(n*k)
 func findRepeatedDnaSequences(s string) []string {
-	seen := make(map[string]int)
-	result := make([]string, 0)
-	for i := 0; i < len(s)-K+1; i++ {
-		substr := s[i : i+K]
-		seen[substr]++
-		if seen[substr] == 2 {
-			result = append(result, substr)
+	if len(s) < K {
+		return []string{}
+	}
+
+	counts := make(map[string]int)
+	result := []string{}
+
+	for i := 0; i <= len(s)-K; i++ {
+		seq := s[i : i+K]
+		counts[seq]++
+		if counts[seq] == 2 {
+			result = append(result, seq)
 		}
 	}
+
 	return result
 }
 
-var MAP = map[rune]int{
+var charMap = map[byte]int{
 	'A': 0,
 	'C': 1,
 	'G': 2,
@@ -32,51 +38,45 @@ var MAP = map[rune]int{
 
 // T: O(n), S: O(n)
 func findRepeatedDnaSequencesRabinKarp(s string) []string {
-	len := len(s)
-	if len < K {
+	if len(s) < K {
 		return []string{}
 	}
 
-	arr := make([]int, len)
-	for i := 0; i < len; i++ {
-		arr[i] = MAP[rune(s[i])]
+	seenHashes := make(map[int]struct{})
+	repeatedSequences := make(map[string]struct{})
+	rollingHash := 0
+	base := 4
+	hashSize := int(math.Pow(float64(base), float64(K-1)))
+
+	for i := 0; i < K; i++ {
+		rollingHash = rollingHash*base + charMap[s[i]]
 	}
+	seenHashes[rollingHash] = struct{}{}
 
-	a := 4
-	currHash := 0
+	for i := 1; i <= len(s)-K; i++ {
+		rollingHash = rollingHash - charMap[s[i-1]]*hashSize
+		rollingHash = rollingHash*base + charMap[s[i+K-1]]
 
-	seen := make(map[int]bool)
-	result := make(map[string]bool)
-
-	for i := 0; i < len-K+1; i++ {
-		if i == 0 {
-			for j := 0; j < K; j++ {
-				currHash += arr[j] * int(math.Pow(float64(a), float64(K-j-1)))
-			}
+		if _, exists := seenHashes[rollingHash]; exists {
+			repeatedSequences[s[i:i+K]] = struct{}{}
 		} else {
-			prevHash := currHash
-			currHash = ((prevHash - arr[i-1]*int(math.Pow(float64(a), float64(K-1)))) * a) + arr[i+K-1]
+			seenHashes[rollingHash] = struct{}{}
 		}
-
-		if seen[currHash] {
-			result[s[i:i+K]] = true
-		}
-
-		seen[currHash] = true
 	}
 
-	var res []string
-	for k := range result {
-		res = append(res, k)
+	result := make([]string, 0, len(repeatedSequences))
+	for seq := range repeatedSequences {
+		result = append(result, seq)
 	}
-	return res
+
+	return result
 }
 
 func main() {
 	s1 := "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
 	s2 := "AAAAAAAAAAAAA"
-	fmt.Println(findRepeatedDnaSequences(s1))
-	fmt.Println(findRepeatedDnaSequences(s2))
-	fmt.Println(findRepeatedDnaSequencesRabinKarp(s1))
-	fmt.Println(findRepeatedDnaSequencesRabinKarp(s2))
+	fmt.Println(findRepeatedDnaSequences(s1))          // ["AAAAACCCCC", "CCCCCAAAAA"]
+	fmt.Println(findRepeatedDnaSequences(s2))          // ["AAAAAAAAAA"]
+	fmt.Println(findRepeatedDnaSequencesRabinKarp(s1)) // ["AAAAACCCCC", "CCCCCAAAAA"]
+	fmt.Println(findRepeatedDnaSequencesRabinKarp(s2)) // ["AAAAAAAAAA"]
 }
