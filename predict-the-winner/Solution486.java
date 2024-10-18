@@ -5,7 +5,7 @@ import java.util.Map;
 
 class Solution486 {
 
-    // T: (O(n^2)), S: (O(n^2))
+    // T: O(2^n), S: O(n^2)
     public boolean predictTheWinner(int[] nums) {
         var memo = new HashMap<String, Integer>();
         return turn(nums, 0, nums.length - 1, true, memo) >= 0;

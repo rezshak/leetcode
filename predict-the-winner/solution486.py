@@ -5,7 +5,7 @@ from typing import List
 
 class Solution486:
 
-    # T: (O(n^2)), S: (O(n^2))
+    # T: O(2^n), S: O(n^2)
     def predictTheWinner(self, nums: List[int]) -> bool:
         memo = {}
 

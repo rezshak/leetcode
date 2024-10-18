@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-// T: (O(n^2)), S: (O(n^2))
+// T: O(2^n), S: O(n^2)
 func predictTheWinner(nums []int) bool {
 	memo := make(map[string]int)
 	return turn(nums, 0, len(nums)-1, true, memo) >= 0
