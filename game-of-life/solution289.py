@@ -39,9 +39,9 @@ class Solution289:
                 bottom = min(rows - 1, row + 1)
                 left = max(0, col - 1)
                 right = min(cols - 1, col + 1)
-                for i in range(top, bottom + 1):
-                    for j in range(left, right + 1):
-                        if not (i == row and j == col) and abs(board[i][j]) == 1:
+                for r in range(top, bottom + 1):
+                    for c in range(left, right + 1):
+                        if not (r == row and c == col) and abs(board[r][c]) == 1:
                             live_neighbors += 1
                 if board[row][col] == 1:
                     if live_neighbors < 2 or live_neighbors > 3:

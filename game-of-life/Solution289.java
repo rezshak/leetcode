@@ -49,10 +49,10 @@ class Solution289 {
                 int bottom = Math.min(rows - 1, row + 1);
                 int left = Math.max(0, col - 1);
                 int right = Math.min(cols - 1, col + 1);
-                for (int i = top; i <= bottom; i++) {
-                    for (int j = left; j <= right; j++) {
+                for (int r = top; r <= bottom; r++) {
+                    for (int c = left; c <= right; c++) {
                         // Skip the current cell itself, count the live neighbors
-                        if (!(i == row && j == col) && Math.abs(board[i][j]) == 1) {
+                        if (!(r == row && c == col) && Math.abs(board[r][c]) == 1) {
                             liveNeighbors++;
                         }
                     }

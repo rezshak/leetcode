@@ -50,9 +50,9 @@ func gameOfLifeOpt(board [][]int) {
 			bottom := min(rows-1, row+1)
 			left := max(0, col-1)
 			right := min(cols-1, col+1)
-			for i := top; i <= bottom; i++ {
-				for j := left; j <= right; j++ {
-					if !(i == row && j == col) && abs(board[i][j]) == 1 {
+			for r := top; r <= bottom; r++ {
+				for c := left; c <= right; c++ {
+					if !(r == row && c == col) && abs(board[r][c]) == 1 {
 						liveNeighbors++
 					}
 				}
