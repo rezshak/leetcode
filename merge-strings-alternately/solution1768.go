@@ -7,19 +7,19 @@ import (
 	"strings"
 )
 
-// T: O(n), S: O(n)
+// T: O(n+m), S: O(n+m)
 func mergeAlternately(word1 string, word2 string) string {
 	n1, n2 := len(word1), len(word2)
-	i1, i2 := 0, 0
+	p1, p2 := 0, 0
 	var sb strings.Builder
-	for i1 < n1 || i2 < n2 {
-		if i1 < n1 {
-			sb.WriteByte(word1[i1])
-			i1++
+	for p1 < n1 || p2 < n2 {
+		if p1 < n1 {
+			sb.WriteByte(word1[p1])
+			p1++
 		}
-		if i2 < n2 {
-			sb.WriteByte(word2[i2])
-			i2++
+		if p2 < n2 {
+			sb.WriteByte(word2[p2])
+			p2++
 		}
 	}
 	return sb.String()

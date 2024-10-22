@@ -2,17 +2,17 @@
 
 class Solution1768 {
 
-    // T: O(n), S: O(n)
+    // T: O(n+m), S: O(n+m)
     public String mergeAlternately(String word1, String word2) {
-        int len1 = word1.length(), len2 = word2.length();
-        int idx1 = 0, idx2 = 0;
+        int n1 = word1.length(), n2 = word2.length();
+        int p1 = 0, p2 = 0;
         var sb = new StringBuilder();
-        while (idx1 < len1 || idx2 < len2) {
-            if (idx1 < len1) {
-                sb.append(word1.charAt(idx1++));
+        while (p1 < n1 || p2 < n2) {
+            if (p1 < n1) {
+                sb.append(word1.charAt(p1++));
             }
-            if (idx2 < len2) {
-                sb.append(word2.charAt(idx2++));
+            if (p2 < n2) {
+                sb.append(word2.charAt(p2++));
             }
         }
         return sb.toString();
