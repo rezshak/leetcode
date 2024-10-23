@@ -7,37 +7,13 @@ class Solution389 {
     // T: O(n), S: O(1)
     public char findTheDifference(String s, String t) {
         int sSum = 0, tSum = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
+        for (char ch : s.toCharArray()) {
             sSum += (int) ch;
         }
-        for (int i = 0; i < t.length(); i++) {
-            char ch = t.charAt(i);
+        for (char ch : t.toCharArray()) {
             tSum += (int) ch;
         }
-        int diff = tSum - sSum;
-        return (char) diff;
-    }
-
-    // T: O(n), S: O(n)
-    public char findTheDifferenceMap(String s, String t) {
-        var counts = new HashMap<Character, Integer>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            counts.put(ch, counts.getOrDefault(ch, 0) + 1);
-        }
-        for (int i = 0; i < t.length(); i++) {
-            char ch = t.charAt(i);
-            if (!counts.containsKey(ch)) {
-                return ch;
-            }
-            int count = counts.get(ch);
-            if (count == 0) {
-                return ch;
-            }
-            counts.put(ch, --count);
-        }
-        return '\0';
+        return (char) (tSum - sSum);
     }
 
     // T: O(n), S: O(1)
@@ -55,16 +31,34 @@ class Solution389 {
         return '\0';
     }
 
-    // T: O(n), S: O(1)
-    public char findTheDifferenceBitwise(String s, String t) {
-        char ch = '\0';
+    // T: O(n), S: O(n)
+    public char findTheDifferenceMap(String s, String t) {
+        var sCounts = new HashMap<Character, Integer>();
         for (int i = 0; i < s.length(); i++) {
-            ch ^= s.charAt(i);
+            char ch = s.charAt(i);
+            sCounts.put(ch, sCounts.getOrDefault(ch, 0) + 1);
         }
         for (int i = 0; i < t.length(); i++) {
-            ch ^= t.charAt(i);
+            char ch = t.charAt(i);
+            if (!sCounts.containsKey(ch) || sCounts.get(ch) == 0) {
+                return ch;
+            }
+            int count = sCounts.get(ch);
+            sCounts.put(ch, count - 1);
         }
-        return ch;
+        return '\0';
+    }
+
+    // T: O(n), S: O(1)
+    public char findTheDifferenceBitwise(String s, String t) {
+        char res = '\0';
+        for (char ch : s.toCharArray()) {
+            res ^= ch;
+        }
+        for (char ch : t.toCharArray()) {
+            res ^= ch;
+        }
+        return res;
     }
 
     public static void main(String[] args) {

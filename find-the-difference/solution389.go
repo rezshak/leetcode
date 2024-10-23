@@ -15,23 +15,7 @@ func findTheDifference(s string, t string) byte {
 	for _, ch := range t {
 		tSum += int(ch)
 	}
-	diff := tSum - sSum
-	return byte(diff)
-}
-
-// T: O(n), S: O(n)
-func findTheDifferenceMap(s string, t string) byte {
-	counts := make(map[rune]int)
-	for _, ch := range s {
-		counts[ch]++
-	}
-	for _, ch := range t {
-		if _, ok := counts[ch]; !ok || counts[ch] == 0 {
-			return byte(ch)
-		}
-		counts[ch]--
-	}
-	return '\x00'
+	return byte(tSum - sSum)
 }
 
 // T: O(n), S: O(1)
@@ -49,16 +33,31 @@ func findTheDifferenceDict(s string, t string) byte {
 	return '\x00'
 }
 
+// T: O(n), S: O(n)
+func findTheDifferenceMap(s string, t string) byte {
+	sCounts := make(map[rune]int)
+	for _, ch := range s {
+		sCounts[ch]++
+	}
+	for _, ch := range t {
+		if _, ok := sCounts[ch]; !ok || sCounts[ch] == 0 {
+			return byte(ch)
+		}
+		sCounts[ch]--
+	}
+	return '\x00'
+}
+
 // T: O(n), S: O(1)
 func findTheDifferenceBitwise(s string, t string) byte {
-	var ch rune
-	for _, c := range s {
-		ch ^= c
+	var res rune
+	for _, ch := range s {
+		res ^= ch
 	}
-	for _, c := range t {
-		ch ^= c
+	for _, ch := range t {
+		res ^= ch
 	}
-	return byte(ch)
+	return byte(res)
 }
 
 func main() {
