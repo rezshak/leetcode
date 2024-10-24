@@ -7,10 +7,10 @@ class Solution459 {
         int n = s.length();
         for (int i = 1; i <= n / 2; i++) {
             if (n % i == 0) {
-                var substring = s.substring(0, i);
+                var sub = s.substring(0, i);
                 var sb = new StringBuilder();
                 for (int j = 0; j < n / i; j++) {
-                    sb.append(substring);
+                    sb.append(sub);
                 }
                 if (sb.toString().equals(s)) {
                     return true;
