@@ -4,19 +4,18 @@ package main
 
 import "fmt"
 
+// T: O(n), S: O(1)
 func moveZeroes(nums []int) {
-	len := len(nums)
-	left, right := 0, 0
-	for right < len {
-		if nums[right] != 0 {
-			nums[left] = nums[right]
-			left++
+	l, n := 0, len(nums)
+	for r := 0; r < n; r++ {
+		if nums[r] != 0 {
+			nums[l] = nums[r]
+			l++
 		}
-		right++
 	}
-	for left < len {
-		nums[left] = 0
-		left++
+	for l < n {
+		nums[l] = 0
+		l++
 	}
 }
 

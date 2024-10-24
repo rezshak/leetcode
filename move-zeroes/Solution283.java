@@ -6,17 +6,16 @@ class Solution283 {
 
     // T: O(n), S: O(1)
     public void moveZeros(int[] nums) {
-        int len = nums.length;
-        int left = 0, right = 0;
-        while (right < len) {
-            if (nums[right] != 0) {
-                nums[left] = nums[right];
-                left++;
+        int l = 0, n = nums.length;
+        for (int r = 0; r < n; r++) {
+            if (nums[r] != 0) {
+                nums[l] = nums[r];
+                l++;
             }
-            right++;
         }
-        while (left < len) {
-            nums[left++] = 0;
+        while (l < n) {
+            nums[l] = 0;
+            l++;
         }
     }
 
