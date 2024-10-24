@@ -18,7 +18,7 @@ class Solution1822 {
     }
 
     // T: O(n), S: O(1)
-    public int arraySign2(int[] nums) {
+    public int arraySignNegCount(int[] nums) {
         int negCount = 0;
         for (int n : nums) {
             if (n == 0) {
@@ -38,13 +38,13 @@ class Solution1822 {
         var nums3 = new int[] { -1, 1, -1, 1, -1 };
         var nums4 = new int[] { 9, 72, 34, 29, -49, -22, -77, -17, -66, -75, -44, -30, -24 };
         System.out.println(sol.arraySign(nums1)); // 1
-        System.out.println(sol.arraySign2(nums1)); // 1
+        System.out.println(sol.arraySignNegCount(nums1)); // 1
         System.out.println(sol.arraySign(nums2)); // 0
-        System.out.println(sol.arraySign2(nums2)); // 0
+        System.out.println(sol.arraySignNegCount(nums2)); // 0
         System.out.println(sol.arraySign(nums3)); // -1
-        System.out.println(sol.arraySign2(nums3)); // -1
+        System.out.println(sol.arraySignNegCount(nums3)); // -1
         System.out.println(sol.arraySign(nums4)); // -1
-        System.out.println(sol.arraySign2(nums4)); // -1
+        System.out.println(sol.arraySignNegCount(nums4)); // -1
     }
 
 }

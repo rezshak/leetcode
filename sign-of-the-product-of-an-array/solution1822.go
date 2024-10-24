@@ -20,7 +20,7 @@ func arraySign(nums []int) int {
 }
 
 // T: O(n), S: O(1)
-func arraySign2(nums []int) int {
+func arraySignNegCount(nums []int) int {
 	negCount := 0
 	for _, n := range nums {
 		if n == 0 {
@@ -41,12 +41,12 @@ func main() {
 	var nums2 = []int{1, 5, 0, 2, -3}
 	var nums3 = []int{-1, 1, -1, 1, -1}
 	var nums4 = []int{9, 72, 34, 29, -49, -22, -77, -17, -66, -75, -44, -30, -24}
-	fmt.Println(arraySign(nums1))  // 1
-	fmt.Println(arraySign2(nums1)) // 1
-	fmt.Println(arraySign(nums2))  // 0
-	fmt.Println(arraySign2(nums2)) // 0
-	fmt.Println(arraySign(nums3))  // -1
-	fmt.Println(arraySign2(nums3)) // -1
-	fmt.Println(arraySign(nums4))  // -1
-	fmt.Println(arraySign2(nums4)) // -1
+	fmt.Println(arraySign(nums1))         // 1
+	fmt.Println(arraySignNegCount(nums1)) // 1
+	fmt.Println(arraySign(nums2))         // 0
+	fmt.Println(arraySignNegCount(nums2)) // 0
+	fmt.Println(arraySign(nums3))         // -1
+	fmt.Println(arraySignNegCount(nums3)) // -1
+	fmt.Println(arraySign(nums4))         // -1
+	fmt.Println(arraySignNegCount(nums4)) // -1
 }
