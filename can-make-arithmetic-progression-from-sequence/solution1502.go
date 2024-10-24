@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"sort"
 )
 
@@ -22,34 +21,42 @@ func canMakeArithmeticProgression(arr []int) bool {
 
 // T: O(n), S: O(n)
 func canMakeArithmeticProgressionSet(arr []int) bool {
-	set := make(map[int]bool)
-	minVal := math.MaxInt32
-	maxVal := math.MinInt32
-	for _, n := range arr {
-		if n < minVal {
-			minVal = n
-		}
-		if n > maxVal {
-			maxVal = n
-		}
-		set[n] = true
-	}
-	if len(set) == 1 {
+	n := len(arr)
+	if n <= 2 {
 		return true
 	}
-	if len(set) != len(arr) {
+	min, max := arr[0], arr[0]
+	for _, num := range arr {
+		if num < min {
+			min = num
+		}
+		if num > max {
+			max = num
+		}
+	}
+
+	// Calculate the common difference
+	if (max-min)%(n-1) != 0 {
 		return false
 	}
-	diff := (maxVal - minVal) / (len(arr) - 1)
+	diff := (max - min) / (n - 1)
+
+	// If the difference is zero, all elements must be the same
 	if diff == 0 {
 		return true
 	}
-	for i := 0; i < len(arr); i++ {
-		if _, exists := set[minVal+i*diff]; !exists {
+
+	set := make(map[int]bool)
+	for _, num := range arr {
+		// Check if each number is in the arithmetic progression sequence
+		if (num-min)%diff != 0 {
 			return false
 		}
+		set[num] = true
 	}
-	return true
+
+	// Check if all numbers in the arithmetic sequence are present
+	return len(set) == n
 }
 
 func main() {

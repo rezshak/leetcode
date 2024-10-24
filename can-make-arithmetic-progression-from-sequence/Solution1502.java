@@ -18,30 +18,39 @@ class Solution1502 {
 
     // T: O(n), S: O(n)
     public boolean canMakeArithmeticProgressionSet(int[] arr) {
-        var set = new HashSet<Integer>();
-        int minVal = Integer.MAX_VALUE;
-        int maxVal = Integer.MIN_VALUE;
-        for (int n : arr) {
-            minVal = Math.min(minVal, n);
-            maxVal = Math.max(maxVal, n);
-            set.add(n);
-        }
-        if (set.size() == 1) {
+        int n = arr.length;
+        if (n <= 2) {
             return true;
         }
-        if (set.size() != arr.length) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int num : arr) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+
+        // Calculate the common difference
+        if ((max - min) % (n - 1) != 0) {
             return false;
         }
-        int diff = (maxVal - minVal) / (arr.length - 1);
+        int diff = (max - min) / (n - 1);
+
+        // If the difference is zero, all elements must be the same
         if (diff == 0) {
             return true;
         }
-        for (int i = 0; i < arr.length; i++) {
-            if (!set.contains(minVal + i * diff)) {
+
+        var set = new HashSet<Integer>();
+        for (int num : arr) {
+            // Check if each number is in the arithmetic progression sequence
+            if ((num - min) % diff != 0) {
                 return false;
             }
+            set.add(num);
         }
-        return true;
+
+        // Check if all numbers in the arithmetic sequence are present
+        return set.size() == n;
     }
 
     public static void main(String[] args) {
