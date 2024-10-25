@@ -8,12 +8,19 @@ class Solution58 {
         while (r >= 0 && s.charAt(r) == ' ') {
             r--;
         }
-        int count = 0;
+        int len = 0;
         while (r >= 0 && s.charAt(r) != ' ') {
-            count++;
+            len++;
             r--;
         }
-        return count;
+        return len;
+    }
+
+    // T: O(n), S: O(n)
+    public int lengthOfLastWordBuiltin(String s) {
+        var arr = s.trim().split("\\s+");
+        int n = arr.length;
+        return arr[n - 1].length();
     }
 
     public static void main(String[] args) {
@@ -24,6 +31,7 @@ class Solution58 {
         System.out.println(sol.lengthOfLastWord(s1)); // 5
         System.out.println(sol.lengthOfLastWord(s2)); // 4
         System.out.println(sol.lengthOfLastWord(s3)); // 6
+        System.out.println(sol.lengthOfLastWordBuiltin(s3)); // 6
     }
 
 }
