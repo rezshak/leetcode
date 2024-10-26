@@ -6,20 +6,20 @@ import (
 
 // T: O(n), S: O(1)
 func judgeCircle(moves string) bool {
-	position := []int{0, 0} // x, y
+	board := []int{0, 0} // x, y
 	for _, mv := range moves {
 		switch mv {
 		case 'U':
-			position[0]--
+			board[0]--
 		case 'D':
-			position[0]++
+			board[0]++
 		case 'R':
-			position[1]++
+			board[1]++
 		case 'L':
-			position[1]--
+			board[1]--
 		}
 	}
-	return position[0] == 0 && position[1] == 0
+	return board[0] == 0 && board[1] == 0
 }
 
 func main() {

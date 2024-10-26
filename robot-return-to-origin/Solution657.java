@@ -4,19 +4,19 @@ class Solution657 {
 
     // T: O(n), S: O(1)
     public boolean judgeCircle(String moves) {
-        var position = new int[] { 0, 0 }; // x, y
+        var board = new int[] { 0, 0 }; // x, y
         for (char mv : moves.toCharArray()) {
             if (mv == 'U') {
-                position[0]--;
+                board[0]--;
             } else if (mv == 'D') {
-                position[0]++;
+                board[0]++;
             } else if (mv == 'R') {
-                position[1]++;
+                board[1]++;
             } else if (mv == 'L') {
-                position[1]--;
+                board[1]--;
             }
         }
-        return position[0] == 0 && position[1] == 0;
+        return board[0] == 0 && board[1] == 0;
     }
 
     public static void main(String[] args) {
