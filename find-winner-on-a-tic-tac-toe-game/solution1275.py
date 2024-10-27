@@ -1,32 +1,48 @@
 # https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/
 
-N = 3
+N = 3  # NxN board
+PLAYER1 = 1
+PLAYER2 = -1
 
 
 class Solution1275:
 
     # T: O(m), S: O(1)
     def tictactoe(self, moves: list[list[int]]) -> str:
-        n = len(moves)
-        # Row, column, and diagonal sums
-        rows = [0] * N
-        cols = [0] * N
-        diag = 0
-        anti_diag = 0
-        player = 1
+        board = [[0] * N for _ in range(N)]
+        player1_turn = True
         for move in moves:
-            row = move[0]
-            col = move[1]
-            rows[row] += player
-            cols[col] += player
-            if row == col:
-                diag += player
-            if row + col == N - 1:
-                anti_diag += player
-            if abs(rows[row]) == N or abs(cols[col]) == N or abs(diag) == N or abs(anti_diag) == N:
-                return "A" if player == 1 else "B"
-            player *= -1
-        return "Draw" if n == N * N else "Pending"
+            x, y = move
+            if player1_turn:
+                board[x][y] = PLAYER1
+                player1_turn = False
+            else:
+                board[x][y] = PLAYER2
+                player1_turn = True
+        # Check if a row is winner
+        for r in range(N):
+            row_sum = sum(board[r])
+            if row_sum == N:
+                return "A"
+            elif row_sum == -N:
+                return "B"
+        # Check if a col is winner
+        for c in range(N):
+            col_sum = sum(board[r][c] for r in range(N))
+            if col_sum == N:
+                return "A"
+            elif col_sum == -N:
+                return "B"
+        # Check left-right and right-left diagonals
+        lr_diag_sum = sum(board[i][i] for i in range(N))
+        rl_diag_sum = sum(board[i][N - i - 1] for i in range(N))
+        if lr_diag_sum == N or rl_diag_sum == N:
+            return "A"
+        elif lr_diag_sum == -N or rl_diag_sum == -N:
+            return "B"
+        if len(moves) < N * N:
+            return "Pending"
+        return "Draw"
 
 
 def main() -> None:

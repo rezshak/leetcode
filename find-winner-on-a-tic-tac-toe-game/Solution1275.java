@@ -3,35 +3,63 @@
 class Solution1275 {
 
     private static final int N = 3; // NxN board
+    private static final int PLAYER1 = 1;
+    private static final int PLAYER2 = -1;
 
     // T: O(m), S: O(1)
     public String tictactoe(int[][] moves) {
-        int n = moves.length;
-        // Row, column, and diagonal sums
-        var rows = new int[N];
-        var cols = new int[N];
-        int diag = 0;
-        int antiDiag = 0;
-        int player = 1;
-        for (int i = 0; i < n; i++) {
-            int row = moves[i][0];
-            int col = moves[i][1];
-            rows[row] += player;
-            cols[col] += player;
-            if (row == col) {
-                diag += player;
+        var board = new int[N][N];
+        boolean player1Turn = true;
+        for (int i = 0; i < moves.length; i++) {
+            int[] mv = moves[i];
+            int x = mv[0], y = mv[1];
+            if (player1Turn) {
+                board[x][y] = PLAYER1;
+                player1Turn = false;
+            } else {
+                board[x][y] = PLAYER2;
+                player1Turn = true;
             }
-            if (row + col == N - 1) {
-                antiDiag += player;
-            }
-            if (Math.abs(rows[row]) == N || Math.abs(cols[col]) == N ||
-                    Math.abs(diag) == N || Math.abs(antiDiag) == N) {
-                return player == 1 ? "A" : "B";
-            }
-            player *= -1;
         }
-
-        return n == N * N ? "Draw" : "Pending";
+        // Check if a row is winner
+        for (int r = 0; r < N; r++) {
+            int rowSum = 0;
+            for (int c = 0; c < N; c++) {
+                rowSum += board[r][c];
+            }
+            if (rowSum == N) {
+                return "A";
+            } else if (rowSum == -N) {
+                return "B";
+            }
+        }
+        // Check if a col is winner
+        for (int c = 0; c < N; c++) {
+            int colSum = 0;
+            for (int r = 0; r < N; r++) {
+                colSum += board[r][c];
+            }
+            if (colSum == N) {
+                return "A";
+            } else if (colSum == -N) {
+                return "B";
+            }
+        }
+        // Check left-right and right-left diagonals
+        int lrDiagSum = 0, rlDiagSum = 0;
+        for (int i = 0; i < N; i++) {
+            lrDiagSum += board[i][i];
+            rlDiagSum += board[i][N - i - 1];
+        }
+        if (lrDiagSum == N || rlDiagSum == N) {
+            return "A";
+        } else if (lrDiagSum == -N || rlDiagSum == -N) {
+            return "B";
+        }
+        if (moves.length < N * N) {
+            return "Pending";
+        }
+        return "Draw";
     }
 
     public static void main(String[] args) {
