@@ -12,11 +12,12 @@ class Solution118:
         if numRows == 0:
             return triangle
         triangle.append([1])
-        for i in range(1, numRows):
+        for r in range(1, numRows):
             newRow = [1]
-            prevRow = triangle[i - 1]
-            for j in range(1, i):
-                newRow.append(prevRow[j - 1] + prevRow[j])
+            prevRow = triangle[r - 1]
+            for c in range(1, len(prevRow)):
+                num = prevRow[c - 1] + prevRow[c]
+                newRow.append(num)
             newRow.append(1)
             triangle.append(newRow)
         return triangle

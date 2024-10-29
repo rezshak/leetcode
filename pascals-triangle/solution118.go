@@ -13,11 +13,12 @@ func generate(numRows int) [][]int {
 		return triangle
 	}
 	triangle = append(triangle, []int{1})
-	for i := 1; i < numRows; i++ {
+	for r := 1; r < numRows; r++ {
 		newRow := []int{1}
-		prevRow := triangle[i-1]
-		for j := 1; j < i; j++ {
-			newRow = append(newRow, prevRow[j-1]+prevRow[j])
+		prevRow := triangle[r-1]
+		for c := 1; c < len(prevRow); c++ {
+			num := prevRow[c-1] + prevRow[c]
+			newRow = append(newRow, num)
 		}
 		newRow = append(newRow, 1)
 		triangle = append(triangle, newRow)

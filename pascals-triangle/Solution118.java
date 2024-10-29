@@ -11,12 +11,13 @@ class Solution118 {
             return triangle;
         }
         triangle.add(List.of(1));
-        for (int i = 1; i < numRows; i++) {
+        for (int r = 1; r < numRows; r++) {
             var newRow = new ArrayList<Integer>();
-            var prevRow = triangle.get(i - 1);
+            var prevRow = triangle.get(r - 1);
             newRow.add(1);
-            for (int j = 1; j < i; j++) {
-                newRow.add(prevRow.get(j - 1) + prevRow.get(j));
+            for (int c = 1; c < prevRow.size(); c++) {
+                int num = prevRow.get(c - 1) + prevRow.get(c);
+                newRow.add(num);
             }
             newRow.add(1);
             triangle.add(newRow);
