@@ -76,7 +76,6 @@ func generateSubsets(nums []int, index int, curr []int, result *[][]int) {
 	generateSubsets(nums, index+1, curr, result)
 	curr = append(curr, nums[index])
 	generateSubsets(nums, index+1, curr, result)
-	curr = curr[:len(curr)-1]
 }
 
 func main() {
