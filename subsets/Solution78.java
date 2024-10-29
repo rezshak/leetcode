@@ -19,7 +19,7 @@ class Solution78 {
         }
     }
 
-    // T: O(2^n), S: O(n2^n)
+    // T: O(n2^n), S: O(n2^n)
     public List<List<Integer>> subsetsBitmask(int[] nums) {
         int n = nums.length;
         int totalSubsets = 1 << n; // 2^n total subsets
@@ -28,13 +28,21 @@ class Solution78 {
             var curr = new ArrayList<Integer>();
             for (int j = 0; j < n; j++) {
                 // If the j-th bit in i is set, include nums[j] in the current subset.
-                if ((i & (1 << j)) != 0) {
+                if (getBit(i, j) == 1) {
                     curr.add(nums[j]);
                 }
             }
             result.add(curr);
         }
         return result;
+    }
+
+    private int getBit(int num, int bit) {
+        int x = 1 << bit;
+        if ((num & x) == 0) {
+            return 0;
+        }
+        return 1;
     }
 
     // T: O(2^n), S: O(n2^n)

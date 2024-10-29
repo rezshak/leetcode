@@ -19,7 +19,7 @@ class Solution78:
             self.backtrack(nums, i + 1, curr, result)
             curr.pop()
 
-    # T: O(2^n), S: O(n2^n)
+    # T: O(n2^n), S: O(n2^n)
     def subsetsBitmask(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
         totalSubsets = 1 << n  # 2^n total subsets

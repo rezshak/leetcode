@@ -25,7 +25,7 @@ func backtrack(nums []int, start int, curr []int, result *[][]int) {
 	}
 }
 
-// T: O(2^n), S: O(n2^n)
+// T: O(n2^n), S: O(n2^n)
 func subsetsBitmask(nums []int) [][]int {
 	n := len(nums)
 	totalSubsets := 1 << n // 2^n total subsets
@@ -34,13 +34,21 @@ func subsetsBitmask(nums []int) [][]int {
 		var curr []int
 		for j := 0; j < n; j++ {
 			// If the j-th bit in i is set, include nums[j] in the current subset.
-			if (i & (1 << j)) != 0 {
+			if getBit(i, j) == 1 {
 				curr = append(curr, nums[j])
 			}
 		}
 		result = append(result, curr)
 	}
 	return result
+}
+
+func getBit(num, bit int) int {
+	x := 1 << bit
+	if num&x == 0 {
+		return 0
+	}
+	return 1
 }
 
 // T: O(2^n), S: O(n2^n)
