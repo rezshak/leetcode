@@ -6,16 +6,16 @@ import "fmt"
 
 // T: O(n), S: O(1)
 func climbStairs(n int) int {
-	if n == 0 || n == 1 {
+	if n < 3 {
 		return n
 	}
-	a, b := 1, 2
+	a, b, sum := 1, 2, 0
 	for i := 3; i <= n; i++ {
-		sum := a + b
+		sum = a + b
 		a = b
 		b = sum
 	}
-	return b
+	return sum
 }
 
 // T: O(n), S: O(n)

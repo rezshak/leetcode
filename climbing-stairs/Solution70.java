@@ -4,16 +4,16 @@ class Solution70 {
 
     // T: O(n), S: O(1)
     public int climbStairs(int n) {
-        if (n == 0 || n == 1) {
+        if (n < 3) {
             return n;
         }
-        int a = 1, b = 2;
+        int a = 1, b = 2, sum = 0;
         for (int i = 3; i <= n; i++) {
-            int sum = a + b;
+            sum = a + b;
             a = b;
             b = sum;
         }
-        return b;
+        return sum;
     }
 
     // T: O(n), S: O(n)

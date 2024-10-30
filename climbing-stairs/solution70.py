@@ -4,12 +4,14 @@ class Solution70:
 
     # T: O(n), S: O(1)
     def climbStairs(self, n: int) -> int:
-        if n == 0 or n == 1:
+        if n < 3:
             return n
-        a, b = 1, 2
+        a, b, sum = 1, 2, 0
         for i in range(3, n + 1):
-            a, b = b, a + b
-        return b
+            sum = a + b
+            a = b
+            b = sum
+        return sum
 
     # T: O(n), S: O(n)
     def climbStairsDp(self, n: int) -> int:
