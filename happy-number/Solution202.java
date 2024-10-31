@@ -5,18 +5,18 @@ import java.util.HashSet;
 class Solution202 {
 
     // T: O(log n), S: O(log n)
-    public boolean isHappy(int num) {
+    public boolean isHappy(int n) {
         var seen = new HashSet<Integer>();
-        while (!seen.contains(num) && num != 1) {
-            seen.add(num);
-            num = squaredDigitsSum(num);
+        while (!seen.contains(n) && n != 1) {
+            seen.add(n);
+            n = squaredDigitsSum(n);
         }
-        return num == 1;
+        return n == 1;
     }
 
     // T: O(log n), S: O(1)
-    public boolean isHappyOpt(int num) {
-        int slow = num, fast = squaredDigitsSum(num);
+    public boolean isHappyOpt(int n) {
+        int slow = n, fast = squaredDigitsSum(n);
         while (fast != 1 && fast != slow) {
             slow = squaredDigitsSum(slow);
             fast = squaredDigitsSum(squaredDigitsSum(fast));

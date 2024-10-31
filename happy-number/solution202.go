@@ -7,18 +7,18 @@ import (
 )
 
 // T: O(log n), S: O(log n)
-func isHappy(num int) bool {
+func isHappy(n int) bool {
 	seen := make(map[int]bool)
-	for num != 1 && !seen[num] {
-		seen[num] = true
-		num = squaredDigitsSum(num)
+	for n != 1 && !seen[n] {
+		seen[n] = true
+		n = squaredDigitsSum(n)
 	}
-	return num == 1
+	return n == 1
 }
 
 // T: O(log n), S: O(1)
-func isHappyOpt(num int) bool {
-	slow, fast := num, squaredDigitsSum(num)
+func isHappyOpt(n int) bool {
+	slow, fast := n, squaredDigitsSum(n)
 	for fast != 1 && fast != slow {
 		slow = squaredDigitsSum(slow)
 		fast = squaredDigitsSum(squaredDigitsSum(fast))
