@@ -2,7 +2,7 @@
 
 class Solution14 {
 
-    // T: O(n*m), S: O(1)
+    // T: O(n*m^2), S: O(1)
     public String longestCommonPrefix(String[] strs) {
         int endIdx = 0;
         var result = "";
