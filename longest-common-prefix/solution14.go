@@ -9,7 +9,7 @@ import (
 
 type Solution14 struct{}
 
-// T: O(nm), S: O(1)
+// T: O(n*m), S: O(1)
 func longestCommonPrefix(strs []string) string {
 	endIdx := 0
 	result := ""
@@ -26,7 +26,7 @@ func longestCommonPrefix(strs []string) string {
 	return result
 }
 
-// T: O(n), S: O(1)
+// T: O(n*m), S: O(1)
 func longestCommonPrefixOpt(strs []string) string {
 	var sb strings.Builder
 	for i := 0; i < len(strs[0]); i++ {

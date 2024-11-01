@@ -2,7 +2,7 @@
 
 class Solution14 {
 
-    // T: O(nm), S: O(1)
+    // T: O(n*m), S: O(1)
     public String longestCommonPrefix(String[] strs) {
         int endIdx = 0;
         var result = "";
@@ -19,7 +19,7 @@ class Solution14 {
         return result;
     }
 
-    // // T: O(n), S: O(1)
+    // T: O(n*m), S: O(1)
     public String longestCommonPrefixOpt(String[] strs) {
         var sb = new StringBuilder();
         for (int i = 0; i < strs[0].length(); i++) {

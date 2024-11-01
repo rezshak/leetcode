@@ -5,7 +5,7 @@ from typing import List
 
 class Solution14:
 
-    # T: O(nm), S: O(1)
+    # T: O(n*m), S: O(1)
     def longestCommonPrefix(self, strs: List[str]) -> str:
         end_idx = 0
         result = ""
@@ -18,7 +18,7 @@ class Solution14:
             end_idx += 1
         return result
 
-    # T: O(n), S: O(1)
+    # T: O(n*m), S: O(1)
     def longestCommonPrefixOpt(self, strs: List[str]) -> str:
         sb = []
         for i in range(len(strs[0])):
