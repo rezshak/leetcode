@@ -10,10 +10,10 @@ class Solution289 {
     // T: O(mn), S: O(mn)
     public void gameOfLife(int[][] board) {
         int rows = board.length, cols = board[0].length;
-        var newBoard = new int[rows][cols];
+        var newBoard = new boolean[rows][cols];
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                newBoard[row][col] = board[row][col];
+                newBoard[row][col] = board[row][col] == 1 ? true : false;
             }
         }
         for (int row = 0; row < rows; row++) {
@@ -25,7 +25,7 @@ class Solution289 {
                 int right = min(cols - 1, col + 1);
                 for (int r = top; r <= bottom; r++) {
                     for (int c = left; c <= right; c++) {
-                        if (!(r == row && c == col) && newBoard[r][c] == 1) {
+                        if (!(r == row && c == col) && newBoard[r][c]) {
                             liveNeighbors++;
                         }
                     }
@@ -86,14 +86,14 @@ class Solution289 {
                 { 0, 0, 0 }
         };
         sol.gameOfLife(board1);
-        System.out.println(Arrays.deepToString(board1));
+        System.out.println(Arrays.deepToString(board1)); // [[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 1, 0]]
 
         var board2 = new int[][] {
                 { 1, 1 },
                 { 1, 0 }
         };
         sol.gameOfLife(board2);
-        System.out.println(Arrays.deepToString(board2));
+        System.out.println(Arrays.deepToString(board2)); // [[1, 1], [1, 1]]
 
         var board3 = new int[][] {
                 { 0, 1, 0 },
@@ -102,14 +102,14 @@ class Solution289 {
                 { 0, 0, 0 }
         };
         sol.gameOfLife(board3);
-        System.out.println(Arrays.deepToString(board3));
+        System.out.println(Arrays.deepToString(board3)); // [[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 1, 0]]
 
         var board4 = new int[][] {
                 { 1, 1 },
                 { 1, 0 }
         };
         sol.gameOfLife(board4);
-        System.out.println(Arrays.deepToString(board4));
+        System.out.println(Arrays.deepToString(board4)); // [[1, 1], [1, 1]]
     }
 
 }

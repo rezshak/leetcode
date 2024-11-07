@@ -4,28 +4,29 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 // T: O(mn), S: O(mn)
 func gameOfLife(board [][]int) {
 	rows, cols := len(board), len(board[0])
-	newBoard := make([][]int, rows)
+	newBoard := make([][]bool, rows)
 	for i := range newBoard {
-		newBoard[i] = make([]int, cols)
-		copy(newBoard[i], board[i])
+		newBoard[i] = make([]bool, cols)
+		for j := range newBoard[i] {
+			newBoard[i][j] = board[i][j] == 1
+		}
 	}
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
-			top := int(math.Max(0, float64(row-1)))
-			bottom := int(math.Min(float64(rows-1), float64(row+1)))
-			left := int(math.Max(0, float64(col-1)))
-			right := int(math.Min(float64(cols-1), float64(col+1)))
+			top := max(0, row-1)
+			bottom := min(rows-1, row+1)
+			left := max(0, col-1)
+			right := min(cols-1, col+1)
 			liveNeighbors := 0
 
 			for r := top; r <= bottom; r++ {
 				for c := left; c <= right; c++ {
-					if !(r == row && c == col) && newBoard[r][c] == 1 {
+					if !(r == row && c == col) && newBoard[r][c] {
 						liveNeighbors++
 					}
 				}
@@ -110,14 +111,14 @@ func main() {
 		{0, 0, 0},
 	}
 	gameOfLife(board1)
-	fmt.Println(board1)
+	fmt.Println(board1) // [[0 0 0] [1 0 1] [0 1 1] [0 1 0]]
 
 	board2 := [][]int{
 		{1, 1},
 		{1, 0},
 	}
 	gameOfLife(board2)
-	fmt.Println(board2)
+	fmt.Println(board2) // [[1 1] [1 1]]
 
 	board3 := [][]int{
 		{0, 1, 0},
@@ -126,12 +127,12 @@ func main() {
 		{0, 0, 0},
 	}
 	gameOfLifeOpt(board3)
-	fmt.Println(board3)
+	fmt.Println(board3) // [[0 0 0] [1 0 1] [0 1 1] [0 1 0]]
 
 	board4 := [][]int{
 		{1, 1},
 		{1, 0},
 	}
 	gameOfLifeOpt(board4)
-	fmt.Println(board4)
+	fmt.Println(board4) // [[1 1] [1 1]]
 }

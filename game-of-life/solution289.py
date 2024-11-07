@@ -68,14 +68,14 @@ def main() -> None:
         [0, 0, 0]
     ]
     sol.gameOfLife(board1)
-    print(board1)
+    print(board1)  # [[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 1, 0]]
 
     board2 = [
         [1, 1],
         [1, 0]
     ]
     sol.gameOfLife(board2)
-    print(board2)
+    print(board2)  # [[1, 1], [1, 1]]
 
     board3 = [
         [0, 1, 0],
@@ -84,14 +84,14 @@ def main() -> None:
         [0, 0, 0]
     ]
     sol.gameOfLifeOpt(board3)
-    print(board3)
+    print(board3)  # [[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 1, 0]]
 
     board4 = [
         [1, 1],
         [1, 0]
     ]
     sol.gameOfLifeOpt(board4)
-    print(board4)
+    print(board4)  # [[1, 1], [1, 1]]
 
 
 if __name__ == "__main__":
