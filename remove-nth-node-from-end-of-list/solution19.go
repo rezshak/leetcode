@@ -14,17 +14,42 @@ type ListNode struct {
 
 // T: O(n), S: O(1)
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	fake := &ListNode{Val: -1, Next: head}
-	left, right := fake, head
+	right := head
 	for i := 0; i < n && right != nil; i++ {
 		right = right.Next
 	}
-	for right != nil {
+	if right == nil {
+		return head.Next
+	}
+	left := head
+	for right.Next != nil {
 		right = right.Next
 		left = left.Next
 	}
 	left.Next = left.Next.Next
-	return fake.Next
+	return head
+}
+
+// T: O(n), S: O(1)
+func removeNthFromEndTwoPass(head *ListNode, n int) *ListNode {
+	if head == nil {
+		return head
+	}
+	size := 0
+	curr := head
+	for curr != nil {
+		curr = curr.Next
+		size++
+	}
+	if size == n {
+		return head.Next
+	}
+	prev := head
+	for i := 0; i < size-n-1; i++ {
+		prev = prev.Next
+	}
+	prev.Next = prev.Next.Next
+	return head
 }
 
 func printList(head *ListNode) {
@@ -46,8 +71,13 @@ func main() {
 	head1.Next.Next.Next = &ListNode{Val: 4}
 	head1.Next.Next.Next.Next = &ListNode{Val: 5}
 	printList(head1)
-	printList(removeNthFromEnd(head1, 2)) // [ 1 2 3 5 ]
-	head2 := &ListNode{1, nil}
+	newHead1 := removeNthFromEnd(head1, 2)
+	printList(newHead1) // [ 1 2 3 5 ]
+	head2 := &ListNode{Val: 1}
 	printList(head2)
-	printList(removeNthFromEnd(head2, 1)) // [ ]
+	newHead2 := removeNthFromEnd(head2, 1)
+	printList(newHead2) // [ ]
+	head3 := &ListNode{Val: 3, Next: &ListNode{Val: 4}}
+	newHead3 := removeNthFromEndTwoPass(head3, 1)
+	printList(newHead3) // [ 3 ]
 }
