@@ -5,17 +5,16 @@ class Solution1491 {
     // T: O(n), S: O(1)
     public double average(int[] salary) {
         int n = salary.length;
-        int minS = salary[0], maxS = salary[0];
-        double totalS = 0.0;
-        for (int s : salary) {
-            minS = Math.min(minS, s);
-            maxS = Math.max(maxS, s);
-            totalS += s;
+        int minSal = salary[0], maxSal = salary[0];
+        double sum = 0.0;
+        for (int sal : salary) {
+            minSal = Math.min(minSal, sal);
+            maxSal = Math.max(maxSal, sal);
+            sum += sal;
         }
-        totalS -= minS;
-        totalS -= maxS;
-        double avgS = totalS / (n - 2);
-        return avgS;
+        sum -= minSal;
+        sum -= maxSal;
+        return sum / (n - 2);
     }
 
     public static void main(String[] args) {

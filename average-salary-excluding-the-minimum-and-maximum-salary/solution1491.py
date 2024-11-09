@@ -7,16 +7,15 @@ class Solution1491:
 
     # T: O(n), S: O(1)
     def average(self, salary: List[int]) -> None:
-        min_s, max_s, n = salary[0], salary[0], len(salary)
-        total_s = 0
+        min_sal, max_sal, n = salary[0], salary[0], len(salary)
+        sum = 0
         for s in salary:
-            min_s = min(min_s, s)
-            max_s = max(max_s, s)
-            total_s += s
-        total_s -= min_s
-        total_s -= max_s
-        avg_s = total_s / (n - 2)
-        return avg_s
+            min_sal = min(min_sal, s)
+            max_sal = max(max_sal, s)
+            sum += s
+        sum -= min_sal
+        sum -= max_sal
+        return sum / (n - 2)
 
 
 def main() -> None:

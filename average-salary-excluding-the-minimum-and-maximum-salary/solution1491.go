@@ -6,17 +6,17 @@ import "fmt"
 
 // T: O(n), S: O(1)
 func average(salary []int) float64 {
-	minS, maxS, n := salary[0], salary[0], len(salary)
-	totalS := 0
-	for _, s := range salary {
-		minS = min(minS, s)
-		maxS = max(maxS, s)
-		totalS += s
+	minSal, maxSal, n := salary[0], salary[0], len(salary)
+	sum := 0
+	for _, sal := range salary {
+		minSal = min(minSal, sal)
+		maxSal = max(maxSal, sal)
+		sum += sal
 	}
-	totalS -= minS
-	totalS -= maxS
-	avgS := float64(totalS) / float64((n - 2))
-	return avgS
+	sum -= minSal
+	sum -= maxSal
+	avgSal := float64(sum) / float64(n-2)
+	return avgSal
 }
 
 func main() {
