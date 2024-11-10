@@ -18,7 +18,7 @@ class Solution408 {
                 }
                 wordIdx += num;
             } else {
-                if (word.charAt(wordIdx) != abbr.charAt(abbrIdx)) {
+                if (wordIdx > wordLen || word.charAt(wordIdx) != abbr.charAt(abbrIdx)) {
                     return false;
                 }
                 wordIdx++;

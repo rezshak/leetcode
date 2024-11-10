@@ -17,7 +17,7 @@ class Solution408:
                     abbr_idx += 1
                 word_idx += num
             else:
-                if word[word_idx] != abbr[abbr_idx]:
+                if word_idx > word_len or word[word_idx] != abbr[abbr_idx]:
                     return False
                 word_idx += 1
                 abbr_idx += 1
@@ -29,10 +29,10 @@ def main():
     sol = Solution408()
     w1 = "internationalization"
     a1 = "i12iz4n"
-    print(sol.validWordAbbreviation(w1, a1))  # true
+    print(sol.validWordAbbreviation(w1, a1))  # True
     w2 = "apple"
     a2 = "a2e"
-    print(sol.validWordAbbreviation(w2, a2))  # false
+    print(sol.validWordAbbreviation(w2, a2))  # False
 
 
 if __name__ == "__main__":

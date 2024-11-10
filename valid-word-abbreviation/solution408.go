@@ -23,7 +23,7 @@ func validWordAbbreviation(word string, abbr string) bool {
 			}
 			wordIdx += num
 		} else {
-			if word[wordIdx] != abbr[abbrIdx] {
+			if wordIdx > wordLen || word[wordIdx] != abbr[abbrIdx] {
 				return false
 			}
 			wordIdx++
