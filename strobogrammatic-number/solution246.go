@@ -16,15 +16,15 @@ var strobMap = map[rune]rune{
 
 // T: O(n), S: O(1)
 func isStrobogrammatic(num string) bool {
-	left, right := 0, len(num)-1
-	for left <= right {
-		leftChar, rightChar := rune(num[left]), rune(num[right])
-		mappedChar, ok := strobMap[leftChar]
-		if !ok || mappedChar != rightChar {
+	l, r := 0, len(num)-1
+	for l <= r {
+		lch, rch := rune(num[l]), rune(num[r])
+		mappedChar, ok := strobMap[lch]
+		if !ok || mappedChar != rch {
 			return false
 		}
-		left++
-		right--
+		l++
+		r--
 	}
 	return true
 }

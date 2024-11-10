@@ -13,15 +13,15 @@ class Solution246 {
 
     // T: O(n), S: O(1)
     public boolean isStrobogrammatic(String num) {
-        int left = 0, right = num.length() - 1;
-        while (left <= right) {
-            char leftChar = num.charAt(left);
-            char rightChar = num.charAt(right);
-            if (!STROB_MAP.containsKey(leftChar) || STROB_MAP.get(leftChar) != rightChar) {
+        int l = 0, r = num.length() - 1;
+        while (l <= r) {
+            char lch = num.charAt(l);
+            char rch = num.charAt(r);
+            if (!STROB_MAP.containsKey(lch) || STROB_MAP.get(lch) != rch) {
                 return false;
             }
-            left++;
-            right--;
+            l++;
+            r--;
         }
         return true;
     }
