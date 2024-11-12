@@ -13,7 +13,8 @@ class Solution408:
                     return False
                 num = 0
                 while abbr_idx < abbr_len and abbr[abbr_idx].isdigit():
-                    num = num * 10 + int(abbr[abbr_idx])
+                    digit = int(abbr[abbr_idx])
+                    num = num * 10 + digit
                     abbr_idx += 1
                 word_idx += num
             else:
@@ -27,12 +28,12 @@ class Solution408:
 
 def main():
     sol = Solution408()
-    w1 = "internationalization"
-    a1 = "i12iz4n"
+    w1, a1 = "internationalization", "i12iz4n"
     print(sol.validWordAbbreviation(w1, a1))  # True
-    w2 = "apple"
-    a2 = "a2e"
+    w2, a2 = "apple", "a2e"
     print(sol.validWordAbbreviation(w2, a2))  # False
+    w3, a3 = "internationalization", "i5a11o1"
+    print(sol.validWordAbbreviation(w3, a3))  # True
 
 
 if __name__ == "__main__":

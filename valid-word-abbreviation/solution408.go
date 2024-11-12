@@ -18,12 +18,13 @@ func validWordAbbreviation(word string, abbr string) bool {
 			}
 			num := 0
 			for abbrIdx < abbrLen && unicode.IsDigit(rune(abbr[abbrIdx])) {
-				num = num*10 + int(abbr[abbrIdx]-'0')
+				digit := int(abbr[abbrIdx] - '0')
+				num = num*10 + digit
 				abbrIdx++
 			}
 			wordIdx += num
 		} else {
-			if wordIdx > wordLen || word[wordIdx] != abbr[abbrIdx] {
+			if wordIdx >= wordLen || word[wordIdx] != abbr[abbrIdx] {
 				return false
 			}
 			wordIdx++
@@ -38,4 +39,6 @@ func main() {
 	fmt.Println(validWordAbbreviation(w1, a1)) // true
 	w2, a2 := "apple", "a2e"
 	fmt.Println(validWordAbbreviation(w2, a2)) // false
+	w3, a3 := "internationalization", "i5a11o1"
+	fmt.Println(validWordAbbreviation(w3, a3)) // true
 }

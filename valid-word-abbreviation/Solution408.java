@@ -13,12 +13,13 @@ class Solution408 {
                 }
                 int num = 0;
                 while (abbrIdx < abbrLen && Character.isDigit(abbr.charAt(abbrIdx))) {
-                    num = num * 10 + (abbr.charAt(abbrIdx) - '0');
+                    int digit = abbr.charAt(abbrIdx) - '0';
+                    num = num * 10 + digit;
                     abbrIdx++;
                 }
                 wordIdx += num;
             } else {
-                if (wordIdx > wordLen || word.charAt(wordIdx) != abbr.charAt(abbrIdx)) {
+                if (wordIdx >= wordLen || word.charAt(wordIdx) != abbr.charAt(abbrIdx)) {
                     return false;
                 }
                 wordIdx++;
@@ -36,6 +37,9 @@ class Solution408 {
         var w2 = "apple";
         var a2 = "a2e";
         System.out.println(sol.validWordAbbreviation(w2, a2)); // false
+        var w3 = "internationalization";
+        var a3 = "i5a11o1";
+        System.out.println(sol.validWordAbbreviation(w3, a3)); // true
     }
 
 }
