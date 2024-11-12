@@ -11,13 +11,13 @@ class Solution408 {
                 if (abbr.charAt(abbrIdx) == '0') {
                     return false;
                 }
-                int num = 0;
+                int jump = 0;
                 while (abbrIdx < abbrLen && Character.isDigit(abbr.charAt(abbrIdx))) {
                     int digit = abbr.charAt(abbrIdx) - '0';
-                    num = num * 10 + digit;
+                    jump = jump * 10 + digit;
                     abbrIdx++;
                 }
-                wordIdx += num;
+                wordIdx += jump;
             } else {
                 if (wordIdx >= wordLen || word.charAt(wordIdx) != abbr.charAt(abbrIdx)) {
                     return false;

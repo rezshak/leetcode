@@ -16,13 +16,13 @@ func validWordAbbreviation(word string, abbr string) bool {
 			if abbr[abbrIdx] == '0' {
 				return false
 			}
-			num := 0
+			jump := 0
 			for abbrIdx < abbrLen && unicode.IsDigit(rune(abbr[abbrIdx])) {
 				digit := int(abbr[abbrIdx] - '0')
-				num = num*10 + digit
+				jump = jump*10 + digit
 				abbrIdx++
 			}
-			wordIdx += num
+			wordIdx += jump
 		} else {
 			if wordIdx >= wordLen || word[wordIdx] != abbr[abbrIdx] {
 				return false

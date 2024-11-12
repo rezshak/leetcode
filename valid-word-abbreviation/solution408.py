@@ -11,12 +11,12 @@ class Solution408:
             if abbr[abbr_idx].isdigit():
                 if abbr[abbr_idx] == '0':
                     return False
-                num = 0
+                jump = 0
                 while abbr_idx < abbr_len and abbr[abbr_idx].isdigit():
                     digit = int(abbr[abbr_idx])
-                    num = num * 10 + digit
+                    jump = jump * 10 + digit
                     abbr_idx += 1
-                word_idx += num
+                word_idx += jump
             else:
                 if word_idx > word_len or word[word_idx] != abbr[abbr_idx]:
                     return False
