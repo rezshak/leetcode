@@ -13,8 +13,27 @@ func NewListNode(val int) *ListNode {
 	return &ListNode{Val: val, Next: nil}
 }
 
-// T: O(n), S: O(1)
+// T: O(n), S: O(n)
 func isPalindrome(head *ListNode) bool {
+	var list []int
+	curr := head
+	for curr != nil {
+		list = append(list, curr.Val)
+		curr = curr.Next
+	}
+	left, right := 0, len(list)-1
+	for left < right {
+		if list[left] != list[right] {
+			return false
+		}
+		left++
+		right--
+	}
+	return true
+}
+
+// T: O(n), S: O(1)
+func isPalindromeInPlace(head *ListNode) bool {
 	firstHalfEnd := firstHalfEnd(head)
 	secondHalfStart := reverseList(firstHalfEnd.Next)
 
@@ -101,12 +120,14 @@ func main() {
 	head1.Next.Next = NewListNode(2)
 	head1.Next.Next.Next = NewListNode(1)
 	fmt.Println(isPalindrome(head1))          // true
+	fmt.Println(isPalindromeInPlace(head1))   // true
 	fmt.Println(isPalindromeHalfStack(head1)) // true
 	fmt.Println(isPalindromeFullStack(head1)) // true
 	// [1,2]
 	head2 := NewListNode(1)
 	head2.Next = NewListNode(2)
 	fmt.Println(isPalindrome(head2))          // false
+	fmt.Println(isPalindromeInPlace(head2))   // false
 	fmt.Println(isPalindromeHalfStack(head2)) // false
 	fmt.Println(isPalindromeFullStack(head2)) // false
 	// [1,1,2,1]
@@ -115,6 +136,7 @@ func main() {
 	head3.Next.Next = NewListNode(2)
 	head3.Next.Next.Next = NewListNode(1)
 	fmt.Println(isPalindrome(head3))          // false
+	fmt.Println(isPalindromeInPlace(head3))   // false
 	fmt.Println(isPalindromeHalfStack(head3)) // false
 	fmt.Println(isPalindromeFullStack(head3)) // false
 	// [1,0,1]
@@ -122,6 +144,7 @@ func main() {
 	head4.Next = NewListNode(0)
 	head4.Next.Next = NewListNode(1)
 	fmt.Println(isPalindrome(head4))          // true
+	fmt.Println(isPalindromeInPlace(head4))   // true
 	fmt.Println(isPalindromeHalfStack(head4)) // true
 	fmt.Println(isPalindromeFullStack(head4)) // true
 }

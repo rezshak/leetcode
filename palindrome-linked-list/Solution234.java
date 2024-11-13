@@ -1,11 +1,31 @@
 // https://leetcode.com/problems/palindrome-linked-list/
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 class Solution234 {
 
-    // T: O(n), S: O(1)
+    // T: O(n), S: O(n)
     public boolean isPalindrome(ListNode head) {
+        var list = new ArrayList<Integer>();
+        var curr = head;
+        while (curr != null) {
+            list.add(curr.val);
+            curr = curr.next;
+        }
+        int left = 0, right = list.size() - 1;
+        while (left < right) {
+            if (list.get(left) != list.get(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    // T: O(n), S: O(1)
+    public boolean isPalindromeInPlace(ListNode head) {
         var firstHalfEnd = firstHalfEnd(head);
         var secondHalfStart = reverseList(firstHalfEnd.next);
         var curr1 = head;
@@ -91,12 +111,14 @@ class Solution234 {
         head1.next.next = new ListNode(2);
         head1.next.next.next = new ListNode(1);
         System.out.println(sol.isPalindrome(head1)); // true
+        System.out.println(sol.isPalindromeInPlace(head1)); // true
         System.out.println(sol.isPalindromeHalfStack(head1)); // true
         System.out.println(sol.isPalindromeFullStack(head1)); // true
         // [1,2]
         var head2 = new ListNode(1);
         head2.next = new ListNode(2);
         System.out.println(sol.isPalindrome(head2)); // false
+        System.out.println(sol.isPalindromeInPlace(head2)); // false
         System.out.println(sol.isPalindromeHalfStack(head2)); // false
         System.out.println(sol.isPalindromeFullStack(head2)); // false
         // [1,1,2,1]
@@ -105,6 +127,7 @@ class Solution234 {
         head3.next.next = new ListNode(2);
         head3.next.next.next = new ListNode(1);
         System.out.println(sol.isPalindrome(head3)); // false
+        System.out.println(sol.isPalindromeInPlace(head3)); // false
         System.out.println(sol.isPalindromeHalfStack(head3)); // false
         System.out.println(sol.isPalindromeFullStack(head3)); // false
         // [1,0,1]
@@ -112,6 +135,7 @@ class Solution234 {
         head4.next = new ListNode(0);
         head4.next.next = new ListNode(1);
         System.out.println(sol.isPalindrome(head4)); // true
+        System.out.println(sol.isPalindromeInPlace(head4)); // true
         System.out.println(sol.isPalindromeHalfStack(head4)); // true
         System.out.println(sol.isPalindromeFullStack(head4)); // true
     }
