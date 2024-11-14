@@ -3,12 +3,11 @@
 class Solution224:
 
     # T: O(n), S: O(n)
-    def calculate(self, exp: str) -> int:
-        n = len(exp)
+    def calculate(self, s: str) -> int:
         st = []
         num, result, sign = 0, 0, 1
 
-        for ch in exp:
+        for ch in s:
             if ch.isdigit():
                 digit = int(ch)
                 num = num * 10 + digit

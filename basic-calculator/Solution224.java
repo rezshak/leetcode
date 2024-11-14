@@ -5,11 +5,12 @@ import java.util.Stack;
 class Solution224 {
 
     // T: O(n), S: O(n)
-    public int calculate(String exp) {
-        int n = exp.length();
+    public int calculate(String s) {
+        int n = s.length();
         var st = new Stack<Integer>();
         int num = 0, result = 0, sign = 1;
-        for (char ch : exp.toCharArray()) {
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
             if (Character.isDigit(ch)) {
                 int digit = ch - '0';
                 num = num * 10 + digit;

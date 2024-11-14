@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/basic-calculator/
+
 package main
 
 import (
@@ -8,12 +9,11 @@ import (
 )
 
 // T: O(n), S: O(n)
-func calculate(exp string) int {
-	n := len(exp)
+func calculate(s string) int {
 	st := []int{}
 	num, result, sign := 0, 0, 1
 
-	for _, ch := range exp {
+	for _, ch := range s {
 		if unicode.IsDigit(ch) {
 			digit, _ := strconv.Atoi(string(ch))
 			num = num*10 + digit
