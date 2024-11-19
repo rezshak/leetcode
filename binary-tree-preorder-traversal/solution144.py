@@ -16,15 +16,14 @@ class Solution144:
     # T: O(n), S: O(n)
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:  # nlr
         result = []
-        self.preorderHelper(root, result)
-        return result
 
-    def preorderHelper(self, node: Optional[TreeNode], result: List[int]):
-        if node is None:
-            return
-        result.append(node.val)
-        self.preorderHelper(node.left, result)
-        self.preorderHelper(node.right, result)
+        def helper(node):
+            if node:
+                result.append(node.val)
+                helper(node.left)
+                helper(node.right)
+        helper(root)
+        return result
 
     # T: O(n), S: O(n)
     def preorderTraversalStack(self, root: Optional[TreeNode]) -> List[int]:

@@ -16,14 +16,14 @@ class Solution94:
     # T: O(n), S: O(n)
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         result = []
-        self.helper(root, result)
-        return result
 
-    def helper(self, node: Optional[TreeNode], result: List[int]):
-        if node:
-            self.helper(node.left, result)
-            result.append(node.val)
-            self.helper(node.right, result)
+        def helper(node):
+            if node:
+                helper(node.left)
+                result.append(node.val)
+                helper(node.right)
+        helper(root)
+        return result
 
     # T: O(n), S: O(n)
     def inorderTraversalStack(self, root: Optional[TreeNode]) -> List[int]:
