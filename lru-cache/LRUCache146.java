@@ -4,13 +4,14 @@ import java.util.*;
 
 class LRUCache {
 
-    class Node {
+    private class Node {
         int key, value;
         Node prev, next;
 
         Node(int key, int value) {
             this.key = key;
             this.value = value;
+            prev = next = null;
         }
 
         @Override
@@ -19,9 +20,9 @@ class LRUCache {
         }
     }
 
-    Map<Integer, Node> cache;
-    Node fakeHead, fakeTail;
-    int capacity;
+    private Map<Integer, Node> cache;
+    private Node fakeHead, fakeTail;
+    private int capacity;
 
     // S: O(capacity)
     public LRUCache(int capacity) {
@@ -46,17 +47,16 @@ class LRUCache {
     // T: O(1)
     public void put(int key, int value) {
         var node = cache.get(key);
-        if (node != null) {
-            node.value = value;
-            moveToHead(node);
-        } else {
+        if (node == null) {
             if (cache.size() >= capacity) {
                 removeTail();
             }
-            var newNode = new Node(key, value);
-            cache.put(key, newNode);
-            moveToHead(newNode);
+            node = new Node(key, value);
+            cache.put(key, node);
+        } else {
+            node.value = value;
         }
+        moveToHead(node);
     }
 
     private void moveToHead(Node node) {
@@ -83,7 +83,7 @@ class LRUCache {
         lru.put(1, 1);
         lru.put(2, 2);
         System.out.println(lru.get(1)); // 1
-        lru.put(3, 3);              
+        lru.put(3, 3);
         System.out.println(lru.get(2)); // -1
         lru.put(4, 4);
         System.out.println(lru.get(1)); // -1

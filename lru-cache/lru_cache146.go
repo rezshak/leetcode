@@ -33,51 +33,47 @@ func Constructor(capacity int) LRUCache {
 }
 
 // T: O(1)
-func (l *LRUCache) Get(key int) int {
-	node, exists := l.cache[key]
+func (lru *LRUCache) Get(key int) int {
+	node, exists := lru.cache[key]
 	if !exists {
 		return -1
 	}
-	l.moveToHead(node)
+	lru.moveToHead(node)
 	return node.value
 }
 
 // T: O(1)
-func (l *LRUCache) Put(key, value int) {
-	if node, exists := l.cache[key]; exists {
-		node.value = value
-		l.moveToHead(node)
-	} else {
-		if len(l.cache) >= l.capacity {
-			l.removeTail()
+func (lru *LRUCache) Put(key int, value int) {
+	node, exists := lru.cache[key]
+	if !exists {
+		if len(lru.cache) >= lru.capacity {
+			lru.removeTail()
 		}
-		newNode := &Node{key: key, value: value}
-		l.cache[key] = newNode
-		l.addToHead(newNode)
+		node = &Node{key: key, value: value}
+		lru.cache[key] = node
+	} else {
+		node.value = value
 	}
+	lru.moveToHead(node)
 }
 
-func (l *LRUCache) moveToHead(node *Node) {
-	l.removeNode(node)
-	l.addToHead(node)
+func (lru *LRUCache) moveToHead(node *Node) {
+	// Existing node
+	if node.prev != nil {
+		node.prev.next = node.next
+		node.next.prev = node.prev
+	}
+	node.next = lru.fakeHead.next
+	node.prev = lru.fakeHead
+	lru.fakeHead.next.prev = node
+	lru.fakeHead.next = node
 }
 
-func (l *LRUCache) addToHead(node *Node) {
-	node.prev = l.fakeHead
-	node.next = l.fakeHead.next
-	l.fakeHead.next.prev = node
-	l.fakeHead.next = node
-}
-
-func (l *LRUCache) removeNode(node *Node) {
-	node.prev.next = node.next
-	node.next.prev = node.prev
-}
-
-func (l *LRUCache) removeTail() {
-	tail := l.fakeTail.prev
-	l.removeNode(tail)
-	delete(l.cache, tail.key)
+func (lru *LRUCache) removeTail() {
+	lastNode := lru.fakeTail.prev
+	delete(lru.cache, lastNode.key)
+	lastNode.prev.next = lru.fakeTail
+	lru.fakeTail.prev = lastNode.prev
 }
 
 func main() {

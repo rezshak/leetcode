@@ -34,15 +34,15 @@ class LRUCache:
     # T: O(1)
     def put(self, key: int, value: int) -> None:
         node = self.cache.get(key)
-        if node:
-            node.value = value
-            self.move_to_head(node)
-        else:
+        if not node:
             if len(self.cache) >= self.capacity:
                 self.remove_tail()
-            new_node = Node(key, value)
-            self.cache[key] = new_node
-            self.move_to_head(new_node)
+            node = Node(key, value)
+            self.cache[key] = node
+        else:
+            node.value = value
+
+        self.move_to_head(node)
 
     def move_to_head(self, node: Node) -> None:
         # Existing node
