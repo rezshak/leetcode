@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// # T: O(n^2), S: O(1)
 func validWordSquare(words []string) bool {
 	rows := len(words)
 	for row := 0; row < rows; row++ {
