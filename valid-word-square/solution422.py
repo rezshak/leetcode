@@ -9,9 +9,10 @@ class Solution422:
     def validWordSquare(self, words: List[str]) -> bool:
         rows = len(words)
         for row in range(rows):
-            word = words[row]
-            for col in range(len(word)):
-                if col >= rows or row >= len(words[col]) or word[col] != words[col][row]:
+            for col in range(len(words[row])):
+                if col >= rows or row >= len(words[col]):
+                    return False
+                if words[row][col] != words[col][row]:
                     return False
         return True
 

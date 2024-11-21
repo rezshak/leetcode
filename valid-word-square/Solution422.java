@@ -8,10 +8,11 @@ class Solution422 {
     public boolean validWordSquare(List<String> words) {
         int rows = words.size();
         for (int row = 0; row < rows; row++) {
-            var word = words.get(row);
-            for (int col = 0; col < word.length(); col++) {
-                if (col >= rows || row >= words.get(col).length() ||
-                        word.charAt(col) != words.get(col).charAt(row)) {
+            for (int col = 0; col < words.get(row).length(); col++) {
+                if (col >= rows || row >= words.get(col).length()) {
+                    return false;
+                }
+                if (words.get(row).charAt(col) != words.get(col).charAt(row)) {
                     return false;
                 }
             }

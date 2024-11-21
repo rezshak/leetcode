@@ -10,9 +10,11 @@ import (
 func validWordSquare(words []string) bool {
 	rows := len(words)
 	for row := 0; row < rows; row++ {
-		word := words[row]
-		for col := 0; col < len(word); col++ {
-			if col >= rows || row >= len(words[col]) || word[col] != words[col][row] {
+		for col := 0; col < len(words[row]); col++ {
+			if col >= rows || row >= len(words[col]) {
+				return false
+			}
+			if words[row][col] != words[col][row] {
 				return false
 			}
 		}
