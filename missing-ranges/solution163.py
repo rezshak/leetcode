@@ -31,13 +31,13 @@ class Solution163:
     def findMissingRangesOpt(self, nums: List[int], lower: int, upper: int) -> List[List[int]]:
         result = []
         prev = lower - 1
-        for i in range(len(nums) + 1):
-            curr = upper + 1
-            if i < len(nums):
-                curr = nums[i]
-            if curr - prev > 1:
-                result.append([prev + 1, curr - 1])
-            prev = curr
+        for num in nums:
+            if num > prev + 1:
+                result.append([prev + 1, num - 1])
+            prev = num
+
+        if prev < upper:
+            result.append([prev + 1, upper])
 
         return result
 

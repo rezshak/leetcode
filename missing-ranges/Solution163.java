@@ -36,14 +36,15 @@ class Solution163 {
     public List<List<Integer>> findMissingRangesOpt(int[] nums, int lower, int upper) {
         var result = new ArrayList<List<Integer>>();
         int prev = lower - 1;
-        for (int i = 0; i <= nums.length; i++) {
-            int curr = (i < nums.length) ? nums[i] : upper + 1;
-            if (curr - prev > 1) {
-                result.add(List.of(prev + 1, curr - 1));
+        for (int num : nums) {
+            if (num > prev + 1) {
+                result.add(List.of(prev + 1, num - 1));
             }
-            prev = curr;
+            prev = num;
         }
-
+        if (prev < upper) {
+            result.add(List.of(prev + 1, upper));
+        }
         return result;
     }
 

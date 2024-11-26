@@ -36,19 +36,17 @@ func findMissingRanges(nums []int, lower int, upper int) [][]int {
 
 // T: O(n), S: O(1)
 func findMissingRangesOpt(nums []int, lower int, upper int) [][]int {
-	var result [][]int
+	result := [][]int{}
 	prev := lower - 1
-	for i := 0; i <= len(nums); i++ {
-		curr := upper + 1
-		if i < len(nums) {
-			curr = nums[i]
+	for _, num := range nums {
+		if num > prev+1 {
+			result = append(result, []int{prev + 1, num - 1})
 		}
-		if curr-prev > 1 {
-			result = append(result, []int{prev + 1, curr - 1})
-		}
-		prev = curr
+		prev = num
 	}
-
+	if prev < upper {
+		result = append(result, []int{prev + 1, upper})
+	}
 	return result
 }
 
