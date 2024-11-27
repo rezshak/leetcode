@@ -22,13 +22,14 @@ class Solution78:
     # T: O(n2^n), S: O(n2^n)
     def subsetsBitmask(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-        totalSubsets = 1 << n  # 2^n total subsets
+        total = 1 << n  # 2^n
         result = []
-        for i in range(totalSubsets):
+        for i in range(total):
             curr = []
             for j in range(n):
                 # If the j-th bit in i is set, include nums[j] in the current subset.
-                if i & (1 << j):
+                mask = 1 << j
+                if i & mask:
                     curr.append(nums[j])
             result.append(curr)
         return result
