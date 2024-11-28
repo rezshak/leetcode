@@ -7,11 +7,10 @@ import (
 )
 
 // T: O(1), S: O(1)
-func hammingWeight(n uint32) int {
-	count := 0
-	mask := uint32(1)
+func hammingWeight(n int) int {
+	count, mask := 0, 1
 	for i := 0; i < 32; i++ {
-		if n&mask != 0 {
+		if n&mask == 1 {
 			count++
 		}
 		n >>= 1
@@ -19,9 +18,23 @@ func hammingWeight(n uint32) int {
 	return count
 }
 
+// T: O(1), S: O(1)
+func hammingWeightMaskShifting(n int) int {
+	count, mask := 0, 1
+	for i := 0; i < 32; i++ {
+		if n&mask != 0 {
+			count++
+		}
+		mask <<= 1
+	}
+	return count
+}
+
 func main() {
-	n1 := uint32(00000000000000000000000000001011)
-	n2 := uint32(00000000000000000000000010000000)
-	fmt.Println(hammingWeight(n1)) // 3
-	fmt.Println(hammingWeight(n2)) // 1
+	n1 := int(00000000000000000000000000001011)
+	n2 := int(00000000000000000000000010000000)
+	fmt.Println(hammingWeight(n1))             // 3
+	fmt.Println(hammingWeightMaskShifting(n1)) // 3
+	fmt.Println(hammingWeight(n2))             // 1
+	fmt.Println(hammingWeightMaskShifting(n2)) // 1
 }
