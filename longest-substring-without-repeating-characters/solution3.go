@@ -6,19 +6,17 @@ import "fmt"
 
 // T: O(n), S: O(min(n, m))
 func lengthOfLongestSubstring(s string) int {
-	set := make(map[byte]bool)
-	left, right, ans := 0, 0, 0
-	for right < len(s) {
-		if !set[s[right]] {
-			set[s[right]] = true
-			right++
-		} else {
-			set[s[left]] = false
-			left++
+	seen := make(map[byte]bool)
+	n, maxLen, l := len(s), 0, 0
+	for r := 0; r < n; r++ {
+		for seen[s[r]] {
+			delete(seen, s[l])
+			l++
 		}
-		ans = max(ans, right-left)
+		seen[s[r]] = true
+		maxLen = max(maxLen, r-l+1)
 	}
-	return ans
+	return maxLen
 }
 
 func main() {

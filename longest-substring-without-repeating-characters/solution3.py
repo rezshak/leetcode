@@ -4,20 +4,15 @@ class Solution3:
 
     # T: O(n), S: O(min(n, m))
     def lengthOfLongestSubstring(self, s: str) -> int:
-        l, r, n = 0, 0, len(s)
-        res = 0
         seen = set()
-        while r < n:
-            if s[r] not in seen:
-                seen.add(s[r])
-                r += 1
-            else:
+        n, max_len, l = len(s), 0, 0
+        for r in range(n):
+            while s[r] in seen:
                 seen.remove(s[l])
                 l += 1
-
-            res = max(res, len(seen))
-
-        return res
+            seen.add(s[r])
+            max_len = max(max_len, r - l + 1)
+        return max_len
 
 
 def main() -> None:
