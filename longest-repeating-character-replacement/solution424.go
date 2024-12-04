@@ -12,8 +12,8 @@ func characterReplacement(s string, k int) int {
 		rightChar := rune(s[right])
 		counts[rightChar]++
 		mostFreqCount = max(mostFreqCount, counts[rightChar])
-		windowValid := right-left+1-mostFreqCount <= k
-		if !windowValid {
+		replacementsNeeded := right - left + 1 - mostFreqCount
+		if replacementsNeeded > k {
 			leftChar := rune(s[left])
 			counts[leftChar]--
 			left++
