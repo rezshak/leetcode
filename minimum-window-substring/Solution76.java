@@ -4,47 +4,56 @@ import java.util.HashMap;
 
 class Solution76 {
 
-    // T: O(n+m), S: O(m)
+    // # T: O(n), S: O(k)
     public String minWindow(String s, String t) {
-
         if (s == null || t == null || s.length() == 0 || t.length() == 0) {
             return "";
         }
 
-        var tFreq = new HashMap<Character, Integer>();
+        var tCounts = new HashMap<Character, Integer>();
         for (char ch : t.toCharArray()) {
-            tFreq.put(ch, tFreq.getOrDefault(ch, 0) + 1);
+            tCounts.put(ch, tCounts.getOrDefault(ch, 0) + 1);
         }
+        int required = tCounts.size();
 
-        int left = 0, minLeft = 0, minLen = Integer.MAX_VALUE, count = 0;
+        int minLeft = 0, minRight = 0, minWinLen = Integer.MAX_VALUE;
 
-        for (int right = 0; right < s.length(); right++) {
-            char rChar = s.charAt(right);
-            if (tFreq.containsKey(rChar)) {
-                tFreq.put(rChar, tFreq.get(rChar) - 1);
-                if (tFreq.get(rChar) >= 0) {
-                    count++;
-                }
+        // Keep track of how many unique characters in t are present
+        // in the current window in its desired frequency
+        int formed = 0;
+
+        var winCounts = new HashMap<Character, Integer>();
+
+        for (int left = 0, right = 0; right < s.length(); right++) {
+            char rightChar = s.charAt(right);
+            winCounts.put(rightChar, winCounts.getOrDefault(rightChar, 0) + 1);
+
+            if (tCounts.containsKey(rightChar)
+                    && winCounts.get(rightChar).intValue() == tCounts.get(rightChar).intValue()) {
+                formed++;
             }
-            // Valid window found, shrink it
-            while (count == t.length()) {
-                if (right - left + 1 < minLen) {
+            // Shrink the window till the point where it ceases to be formed
+            while (left <= right && formed == required) {
+                int currWinLen = right - left + 1;
+                if (currWinLen < minWinLen) {
+                    minWinLen = currWinLen;
                     minLeft = left;
-                    minLen = right - left + 1;
+                    minRight = right;
                 }
-
-                char lChar = s.charAt(left);
-                if (tFreq.containsKey(lChar)) {
-                    tFreq.put(lChar, tFreq.get(lChar) + 1);
-                    if (tFreq.get(lChar) > 0) {
-                        count--;
-                    }
+                // Left char no longer part of the window
+                char leftChar = s.charAt(left);
+                winCounts.put(leftChar, winCounts.get(leftChar) - 1);
+                // If the frequency of the current character becomes less than the desired count
+                // decrement formed
+                if (tCounts.containsKey(leftChar)
+                        && winCounts.get(leftChar).intValue() < tCounts.get(leftChar).intValue()) {
+                    formed--;
                 }
                 left++;
             }
         }
 
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(minLeft, minLeft + minLen);
+        return minWinLen == Integer.MAX_VALUE ? "" : s.substring(minLeft, minRight + 1);
     }
 
     public static void main(String[] args) {

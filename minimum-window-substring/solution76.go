@@ -7,49 +7,50 @@ import (
 	"math"
 )
 
-// T: O(n+m), S: O(m)
+// T: O(n), S: O(k)
 func minWindow(s string, t string) string {
 	if len(s) == 0 || len(t) == 0 {
 		return ""
 	}
 
-	tFreq := make(map[rune]int)
+	tCounts := make(map[rune]int)
 	for _, ch := range t {
-		tFreq[ch]++
+		tCounts[ch]++
 	}
+	required := len(tCounts)
 
-	left, minLeft, minLen, count := 0, 0, math.MaxInt32, 0
+	minLeft, minRight, minWinLen := 0, 0, math.MaxInt32
+	formed := 0
+	winCounts := make(map[rune]int)
 
-	for right, rChar := range s {
-		if _, exists := tFreq[rChar]; exists {
-			tFreq[rChar]--
-			if tFreq[rChar] >= 0 {
-				count++
-			}
+	left := 0
+	for right, rightChar := range s {
+		winCounts[rightChar]++
+		if count, ok := tCounts[rightChar]; ok && winCounts[rightChar] == count {
+			formed++
 		}
 
-		for count == len(t) {
-			if right-left+1 < minLen {
+		for left <= right && formed == required {
+			currWinLen := right - left + 1
+			if currWinLen < minWinLen {
+				minWinLen = currWinLen
 				minLeft = left
-				minLen = right - left + 1
+				minRight = right
 			}
 
-			lChar := rune(s[left])
-			if _, exists := tFreq[lChar]; exists {
-				tFreq[lChar]++
-				if tFreq[lChar] > 0 {
-					count--
-				}
+			leftChar := rune(s[left])
+			winCounts[leftChar]--
+			if count, ok := tCounts[leftChar]; ok && winCounts[leftChar] < count {
+				formed--
 			}
 			left++
 		}
 	}
 
-	if minLen == math.MaxInt32 {
+	if minWinLen == math.MaxInt32 {
 		return ""
 	}
-
-	return s[minLeft : minLeft+minLen]
+	return s[minLeft : minRight+1]
 }
 
 func main() {
