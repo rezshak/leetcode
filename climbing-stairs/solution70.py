@@ -42,14 +42,9 @@ class Solution70:
 
     # T: O(n^2), S: O(n)
     def climbStairsBrute(self, n: int) -> int:
-        return self.helperBrute(0, n)
-
-    def helperBrute(self, i, n: int) -> int:
-        if i > n:
-            return 0
-        if i == n:
-            return 1
-        return self.helperBrute(i + 1, n) + self.helperBrute(i + 2, n)
+        if n < 3:
+            return n
+        return self.climbStairsBrute(n - 1) + self.climbStairsBrute(n - 2)
 
 
 def main() -> None:

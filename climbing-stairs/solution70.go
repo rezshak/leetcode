@@ -54,17 +54,10 @@ func helperMemo(i, n int, memo []int) int {
 
 // T: O(n^2), S: O(n)
 func climbStairsBrute(n int) int {
-	return helperBrute(0, n)
-}
-
-func helperBrute(i, n int) int {
-	if i > n {
-		return 0
+	if n < 3 {
+		return n
 	}
-	if i == n {
-		return 1
-	}
-	return helperBrute(i+1, n) + helperBrute(i+2, n)
+	return climbStairsBrute(n-1) + (n - 2)
 }
 
 func main() {

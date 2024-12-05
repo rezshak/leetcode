@@ -52,17 +52,10 @@ class Solution70 {
 
     // T: O(n^2), S: O(n)
     public int climbStairsBrute(int n) {
-        return helperBrute(0, n);
-    }
-
-    private int helperBrute(int i, int n) {
-        if (i > n) {
-            return 0;
+        if (n < 3) {
+            return n;
         }
-        if (i == n) {
-            return 1;
-        }
-        return helperBrute(i + 1, n) + helperBrute(i + 2, n);
+        return climbStairs(n - 1) + climbStairs(n - 2);
     }
 
     public static void main(String[] args) {
