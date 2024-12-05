@@ -15,8 +15,8 @@ class Solution143 {
         var second = slow.next;
         // Sever the lists
         slow.next = null;
-        ListNode prev = null;
         // Reverse the second list
+        ListNode prev = null;
         while (second != null) {
             var tempNext = second.next;
             second.next = prev;
@@ -24,6 +24,7 @@ class Solution143 {
             second = tempNext;
         }
         second = prev;
+        // Rebuild the list
         while (second != null) {
             var temp1 = first.next;
             var temp2 = second.next;

@@ -30,14 +30,15 @@ class Solution143:
         first, second = head, slow.next
         # Sever the lists
         slow.next = None
-        prev = None
         # Reverse the second list
+        prev = None
         while second:
             temp_next = second.next
             second.next = prev
             prev = second
             second = temp_next
         second = prev
+        # Rebuild the list
         while second:
             temp1 = first.next
             temp2 = second.next

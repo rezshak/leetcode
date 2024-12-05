@@ -22,8 +22,8 @@ func reorderList(head *ListNode) {
 	first, second := head, slow.Next
 	// Sever the lists
 	slow.Next = nil
-	var prev *ListNode
 	// Reverse the second list
+	var prev *ListNode
 	for second != nil {
 		tempNext := second.Next
 		second.Next = prev
@@ -31,6 +31,7 @@ func reorderList(head *ListNode) {
 		second = tempNext
 	}
 	second = prev
+	// Rebuild the list
 	for second != nil {
 		temp1 := first.Next
 		temp2 := second.Next
