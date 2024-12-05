@@ -33,21 +33,19 @@ class Solution70 {
     // T: O(n), S: O(n)
     public int climbStairsMemo(int n) {
         var memo = new int[n + 1];
-        return helperMemo(0, n, memo);
+        return helperMemo(n, memo);
     }
 
-    private int helperMemo(int i, int n, int[] memo) {
-        if (i > n) {
-            return 0;
+    private int helperMemo(int n, int[] memo) {
+        if (memo[n] > 0) {
+            return memo[n];
         }
-        if (i == n) {
-            return 1;
+        if (n < 3) {
+            memo[n] = n;
+            return n;
         }
-        if (memo[i] > 0) {
-            return memo[i];
-        }
-        memo[i] = helperMemo(i + 1, n, memo) + helperMemo(i + 2, n, memo);
-        return memo[i];
+        memo[n] = helperMemo(n - 1, memo) + helperMemo(n - 2, memo);
+        return memo[n];
     }
 
     // T: O(n^2), S: O(n)

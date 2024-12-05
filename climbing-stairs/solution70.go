@@ -35,21 +35,19 @@ func climbStairsDp(n int) int {
 // T: O(n), S: O(n)
 func climbStairsMemo(n int) int {
 	memo := make([]int, n+1)
-	return helperMemo(0, n, memo)
+	return helperMemo(n, memo)
 }
 
-func helperMemo(i, n int, memo []int) int {
-	if i > n {
-		return 0
+func helperMemo(n int, memo []int) int {
+	if memo[n] > 0 {
+		return memo[n]
 	}
-	if i == n {
-		return 1
+	if n < 3 {
+		memo[n] = n
+		return n
 	}
-	if memo[i] > 0 {
-		return memo[i]
-	}
-	memo[i] = helperMemo(i+1, n, memo) + helperMemo(i+2, n, memo)
-	return memo[i]
+	memo[n] = helperMemo(n-1, memo) + helperMemo(n-2, memo)
+	return memo[n]
 }
 
 // T: O(n^2), S: O(n)
@@ -57,7 +55,7 @@ func climbStairsBrute(n int) int {
 	if n < 3 {
 		return n
 	}
-	return climbStairsBrute(n-1) + (n - 2)
+	return climbStairsBrute(n-1) + climbStairsBrute(n-2)
 }
 
 func main() {

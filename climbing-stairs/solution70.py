@@ -27,18 +27,16 @@ class Solution70:
     # T: O(n), S: O(n)
     def climbStairsMemo(self, n: int) -> int:
         memo = [0] * (n + 1)
-        return self.helperMemo(0, n, memo)
+        return self.helperMemo(n, memo)
 
-    def helperMemo(self, i: int, n: int, memo: list) -> int:
-        if i > n:
-            return 0
-        if i == n:
-            return 1
-        if memo[i] > 0:
-            return memo[i]
-        memo[i] = self.helperMemo(i + 1, n, memo) + \
-            self.helperMemo(i + 2, n, memo)
-        return memo[i]
+    def helperMemo(self, n: int, memo: list) -> int:
+        if memo[n] > 0:
+            return n
+        if n < 3:
+            memo[n] = n
+            return n
+        memo[n] = self.helperMemo(n - 1, memo) + self.helperMemo(n - 2, memo)
+        return memo[n]
 
     # T: O(n^2), S: O(n)
     def climbStairsBrute(self, n: int) -> int:
