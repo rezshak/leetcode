@@ -71,16 +71,30 @@ class Solution198 {
         return result;
     }
 
+    // T: O(2^n), S: O(n)
+    public int robBrute(int[] nums) {
+        return dfs(nums, 0);
+    }
+
+    private int dfs(int[] nums, int i) {
+        if (i >= nums.length) {
+            return 0;
+        }
+        return Math.max(dfs(nums, i + 1), nums[i] + dfs(nums, i + 2));
+    }
+
     public static void main(String[] args) {
         var sol = new Solution198();
         var nums1 = new int[] { 1, 2, 3, 1 };
         System.out.println(sol.rob(nums1)); // 4
         System.out.println(sol.robDp(nums1)); // 4
         System.out.println(sol.robMemo(nums1)); // 4
+        System.out.println(sol.robBrute(nums1)); // 4
         var nums2 = new int[] { 2, 7, 9, 3, 1 };
         System.out.println(sol.rob(nums2)); // 12
         System.out.println(sol.robDp(nums2)); // 12
         System.out.println(sol.robMemo(nums2)); // 12
+        System.out.println(sol.robBrute(nums2)); // 12
     }
 
 }

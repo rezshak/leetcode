@@ -66,13 +66,27 @@ func helper(nums []int, i int, memo map[int]int) int {
 	return memo[i]
 }
 
+// T: O(2^n), S: O(n)
+func robBrute(nums []int) int {
+	return dfs(nums, 0)
+}
+
+func dfs(nums []int, i int) int {
+	if i >= len(nums) {
+		return 0
+	}
+	return max(dfs(nums, i+1), nums[i]+dfs(nums, i+2))
+}
+
 func main() {
 	nums := []int{1, 2, 3, 1}
-	fmt.Println(rob(nums))     // 4
-	fmt.Println(robDp(nums))   // 4
-	fmt.Println(robMemo(nums)) // 4
+	fmt.Println(rob(nums))      // 4
+	fmt.Println(robDp(nums))    // 4
+	fmt.Println(robMemo(nums))  // 4
+	fmt.Println(robBrute(nums)) // 4
 	nums = []int{2, 7, 9, 3, 1}
-	fmt.Println(rob(nums))     // 12
-	fmt.Println(robDp(nums))   // 12
-	fmt.Println(robMemo(nums)) // 12
+	fmt.Println(rob(nums))      // 12
+	fmt.Println(robDp(nums))    // 12
+	fmt.Println(robMemo(nums))  // 12
+	fmt.Println(robBrute(nums)) // 12
 }

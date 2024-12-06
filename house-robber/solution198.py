@@ -54,6 +54,15 @@ class Solution198:
                       nums[i] + self.helper(nums, i + 2, memo))
         return memo[i]
 
+    # T: O(2^n), S: O(n)
+    def robBrute(self, nums):
+        return self.dfs(nums, 0)
+
+    def dfs(self, nums, i):
+        if i >= len(nums):
+            return 0
+        return max(self.dfs(nums, i + 1), nums[i] + self.dfs(nums, i + 2))
+
 
 def main() -> None:
     sol = Solution198()
@@ -62,11 +71,13 @@ def main() -> None:
     print(sol.rob(nums))        # 4
     print(sol.robDp(nums))      # 4
     print(sol.robMemo(nums))    # 4
+    print(sol.robBrute(nums))    # 4
 
     nums = [2, 7, 9, 3, 1]
     print(sol.rob(nums))        # 12
     print(sol.robDp(nums))      # 12
     print(sol.robMemo(nums))    # 12
+    print(sol.robBrute(nums))    # 12
 
 
 if __name__ == "__main__":
