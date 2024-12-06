@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 // T: O(n), S: O(1)
@@ -16,11 +15,11 @@ func rob(nums []int) int {
 		return nums[0]
 	}
 
-	prev1 := int(math.Max(float64(nums[0]), float64(nums[1])))
+	prev1 := max(nums[0], nums[1])
 	prev2 := nums[0]
 
 	for i := 2; i < len(nums); i++ {
-		curr := int(math.Max(float64(prev1), float64(nums[i]+prev2)))
+		curr := max(prev1, nums[i]+prev2)
 		prev2 = prev1
 		prev1 = curr
 	}
@@ -41,10 +40,10 @@ func robDp(nums []int) int {
 
 	dp := make([]int, n)
 	dp[0] = nums[0]
-	dp[1] = int(math.Max(float64(nums[0]), float64(nums[1])))
+	dp[1] = max(nums[0], nums[1])
 
 	for i := 2; i < n; i++ {
-		dp[i] = int(math.Max(float64(dp[i-1]), float64(nums[i]+dp[i-2])))
+		dp[i] = max(dp[i-1], nums[i]+dp[i-2])
 	}
 
 	return dp[n-1]
@@ -63,7 +62,7 @@ func helper(nums []int, i int, memo map[int]int) int {
 	if val, ok := memo[i]; ok {
 		return val
 	}
-	memo[i] = int(math.Max(float64(helper(nums, i+1, memo)), float64(nums[i]+helper(nums, i+2, memo))))
+	memo[i] = max(helper(nums, i+1, memo), nums[i]+helper(nums, i+2, memo))
 	return memo[i]
 }
 
