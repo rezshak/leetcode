@@ -2,32 +2,12 @@
 
 class Solution70 {
 
-    // T: O(n), S: O(1)
-    public int climbStairs(int n) {
+    // T: O(n^2), S: O(n)
+    public int climbStairsRec(int n) {
         if (n < 3) {
             return n;
         }
-        int a = 1, b = 2, sum = 0;
-        for (int i = 3; i <= n; i++) {
-            sum = a + b;
-            a = b;
-            b = sum;
-        }
-        return sum;
-    }
-
-    // T: O(n), S: O(n)
-    public int climbStairsDp(int n) {
-        if (n == 0 || n == 1) {
-            return n;
-        }
-        var dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
-        return dp[n];
+        return climbStairsDpBottomUpOpt(n - 1) + climbStairsDpBottomUpOpt(n - 2);
     }
 
     // T: O(n), S: O(n)
@@ -48,24 +28,44 @@ class Solution70 {
         return memo[n];
     }
 
-    // T: O(n^2), S: O(n)
-    public int climbStairsBrute(int n) {
+    // T: O(n), S: O(n)
+    public int climbStairsDp(int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        }
+        var dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+
+    // T: O(n), S: O(1)
+    public int climbStairsDpBottomUpOpt(int n) {
         if (n < 3) {
             return n;
         }
-        return climbStairs(n - 1) + climbStairs(n - 2);
+        int a = 1, b = 2, sum = 0;
+        for (int i = 3; i <= n; i++) {
+            sum = a + b;
+            a = b;
+            b = sum;
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
         var sol = new Solution70();
-        System.out.println(sol.climbStairs(3)); // 3
-        System.out.println(sol.climbStairsDp(3));
+        System.out.println(sol.climbStairsRec(3));
         System.out.println(sol.climbStairsMemo(3));
-        System.out.println(sol.climbStairsBrute(3));
-        System.out.println(sol.climbStairs(4)); // 5
-        System.out.println(sol.climbStairsDp(4)); // 5
+        System.out.println(sol.climbStairsDp(3));
+        System.out.println(sol.climbStairsDpBottomUpOpt(3)); // 3
+        System.out.println(sol.climbStairsRec(4)); // 5
         System.out.println(sol.climbStairsMemo(4)); // 5
-        System.out.println(sol.climbStairsBrute(4)); // 5
+        System.out.println(sol.climbStairsDp(4)); // 5
+        System.out.println(sol.climbStairsDpBottomUpOpt(4)); // 5
     }
 
 }
