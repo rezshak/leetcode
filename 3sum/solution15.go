@@ -13,9 +13,9 @@ func threeSum(nums []int) [][]int {
 	set := make(map[[3]int]bool)
 	result := make([][]int, 0)
 	for i, n1 := range nums {
-		left, right := i+1, len(nums)-1
-		for left < right {
-			n2, n3 := nums[left], nums[right]
+		l, r := i+1, len(nums)-1
+		for l < r {
+			n2, n3 := nums[l], nums[r]
 			sum := n1 + n2 + n3
 			if sum == 0 {
 				triplet := [3]int{n1, n2, n3}
@@ -23,12 +23,12 @@ func threeSum(nums []int) [][]int {
 					set[triplet] = true
 					result = append(result, triplet[:])
 				}
-				left++
-				right--
+				l++
+				r--
 			} else if sum < 0 {
-				left++
+				l++
 			} else {
-				right--
+				r--
 			}
 		}
 	}

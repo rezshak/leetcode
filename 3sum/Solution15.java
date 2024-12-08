@@ -8,25 +8,21 @@ class Solution15 {
     public List<List<Integer>> threeSum(int[] nums) {
         var set = new HashSet<List<Integer>>();
         Arrays.sort(nums);
-        int len = nums.length;
-        for (int i = 0; i < len - 2; i++) {
-            int num1 = nums[i];
-            int left = i + 1, right = len - 1;
-            while (left < right) {
-                int num2 = nums[left];
-                int num3 = nums[right];
-                int currSum = num1 + num2 + num3;
+        int n = nums.length;
+        for (int i = 0; i < n - 2; i++) {
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                int currSum = nums[i] + nums[l] + nums[r];
                 if (currSum == 0) {
-                    var triplet = List.of(num1, num2, num3);
+                    var triplet = List.of(nums[i], nums[l], nums[r]);
                     set.add(triplet);
-                    left++;
-                    right--;
-                    continue;
+                    l++;
+                    r--;
                 }
                 if (currSum < 0) {
-                    left++;
-                } else if (currSum > 0) {
-                    right--;
+                    l++;
+                } else {
+                    r--;
                 }
             }
         }
