@@ -42,6 +42,21 @@ class Solution238:
 
         return output
 
+    # T: O(n), S: O(1)
+    def productExceptSelfOpt2(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        res = [1] * n
+        left_product, right_product = 1, 1
+        l, r = 0, n - 1
+        while l < n and r >= 0:
+            res[l] *= left_product
+            res[r] *= right_product
+            left_product *= nums[l]
+            right_product *= nums[r]
+            l += 1
+            r -= 1
+        return res
+
 
 def main() -> None:
     sol = Solution238()
@@ -49,8 +64,10 @@ def main() -> None:
     nums2 = [-1, 1, 0, -3, 3]
     print(sol.productExceptSelf(nums1))    # [24, 12, 8, 6]
     print(sol.productExceptSelfOpt(nums1))  # [24, 12, 8, 6]
+    print(sol.productExceptSelfOpt2(nums1))  # [24, 12, 8, 6]
     print(sol.productExceptSelf(nums2))    # [0, 0, 9, 0, 0]
     print(sol.productExceptSelfOpt(nums2))  # [0, 0, 9, 0, 0]
+    print(sol.productExceptSelfOpt2(nums2))  # [0, 0, 9, 0, 0]
 
 
 if __name__ == "__main__":

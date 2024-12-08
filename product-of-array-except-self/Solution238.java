@@ -42,14 +42,39 @@ class Solution238 {
         return output;
     }
 
+    // T: O(n), S: O(1)
+    public int[] productExceptSelfOpt2(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        Arrays.fill(res, 1);
+
+        int leftProduct = 1, rightProduct = 1;
+        int l = 0, r = n - 1;
+
+        while (l < n && r >= 0) {
+            res[l] *= leftProduct;
+            res[r] *= rightProduct;
+
+            leftProduct *= nums[l];
+            rightProduct *= nums[r];
+
+            l++;
+            r--;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         var sol = new Solution238();
         var nums1 = new int[] { 1, 2, 3, 4 };
         var nums2 = new int[] { -1, 1, 0, -3, 3 };
         System.out.println(Arrays.toString(sol.productExceptSelf(nums1))); // [24, 12, 8, 6]
         System.out.println(Arrays.toString(sol.productExceptSelfOpt(nums1))); // [24, 12, 8, 6]
+        System.out.println(Arrays.toString(sol.productExceptSelfOpt2(nums1))); // [24, 12, 8, 6]
         System.out.println(Arrays.toString(sol.productExceptSelf(nums2))); // [0, 0, 9, 0, 0]
         System.out.println(Arrays.toString(sol.productExceptSelfOpt(nums2))); // [0, 0, 9, 0, 0]
+        System.out.println(Arrays.toString(sol.productExceptSelfOpt2(nums2))); // [0, 0, 9, 0, 0]
     }
 
 }
