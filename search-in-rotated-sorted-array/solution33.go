@@ -18,13 +18,13 @@ func search(nums []int, target int) int {
 		}
 
 		if nums[left] <= nums[mid] {
-			if target >= nums[left] && target < nums[mid] {
+			if nums[left] <= target && target < nums[mid] {
 				right = mid - 1
 			} else {
 				left = mid + 1
 			}
 		} else {
-			if target > nums[mid] && target <= nums[right] {
+			if nums[mid] < target && target <= nums[right] {
 				left = mid + 1
 			} else {
 				right = mid - 1
