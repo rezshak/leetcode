@@ -26,11 +26,11 @@ func findMin(nums []int) int {
 			return nums[mid+1]
 		}
 
-		if mid > 0 && nums[mid-1] < nums[mid] {
+		if mid > 0 && nums[mid-1] > nums[mid] {
 			return nums[mid]
 		}
 
-		if nums[mid] > nums[0] {
+		if nums[mid] > nums[left] {
 			left = mid + 1
 		} else {
 			right = mid - 1

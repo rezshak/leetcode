@@ -34,7 +34,7 @@ class Solution153 {
             // Decide which half to search
             // If mid element is greater than first element,
             // minimum is in right half
-            if (nums[mid] > nums[0]) {
+            if (nums[mid] > nums[left]) {
                 left = mid + 1;
             }
             // Otherwise, minimum is in left half
