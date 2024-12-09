@@ -19,20 +19,26 @@ class Solution153 {
         while (left <= right) {
             int mid = left + (right - left) / 2;
 
-            // If mid is greater than its next, the next is min
+            // If mid element is greater than its next element,
+            // next element is the minimum
             if (nums[mid] > nums[mid + 1]) {
                 return nums[mid + 1];
             }
 
-            // If mid is less is prev, then mid is min
-            if (nums[mid] < nums[mid - 1]) {
+            // If mid element is less than its previous element,
+            // mid element is the minimum
+            if (mid > 0 && nums[mid - 1] > nums[mid]) {
                 return nums[mid];
             }
 
-            // If mid is greater than first, then min is in right half
+            // Decide which half to search
+            // If mid element is greater than first element,
+            // minimum is in right half
             if (nums[mid] > nums[0]) {
                 left = mid + 1;
-            } else {
+            }
+            // Otherwise, minimum is in left half
+            else {
                 right = mid - 1;
             }
         }
