@@ -26,7 +26,7 @@ func findMin(nums []int) int {
 			return nums[mid+1]
 		}
 
-		if nums[mid] < nums[mid-1] {
+		if mid > 0 && nums[mid-1] < nums[mid] {
 			return nums[mid]
 		}
 
