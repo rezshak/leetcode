@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/maximum-depth-of-binary-tree/
 
+from collections import deque
 from typing import Optional
 
 
@@ -21,6 +22,26 @@ class Solution104:
         rightDepth = self.maxDepth(root.right)
         return max(leftDepth, rightDepth) + 1
 
+    # T: O(n), S: O(n)
+    def maxDepthBfs(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        queue = deque([root])
+        level = 0
+
+        while queue:
+            size = len(queue)
+            for _ in range(size):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            level += 1
+
+        return level
+
 
 def main() -> None:
     sol = Solution104()
@@ -30,6 +51,10 @@ def main() -> None:
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(10)
     print(sol.maxDepth(root))  # 3
+
+    root2 = TreeNode(1)
+    root2.right = TreeNode(2)
+    print(sol.maxDepthBfs(root2))  # 2
 
 
 if __name__ == "__main__":
