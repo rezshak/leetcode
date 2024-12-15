@@ -4,23 +4,31 @@ class Solution1904 {
 
     // T: O(1), S: O(1)
     public int numberOfRounds(String loginTime, String logoutTime) {
-        int startMinutes = getMinutes(loginTime);
-        int finishMinutes = getMinutes(logoutTime);
+        // Convert times to minutes
+        int loginMins = toMinutes(loginTime);
+        int logoutMins = toMinutes(logoutTime);
 
-        if (finishMinutes < startMinutes) {
-            finishMinutes += 24 * 60;
+        // Handle cases where logout time is before login time (next day)
+        if (logoutMins < loginMins) {
+            logoutMins += 24 * 60;
         }
 
-        int roundedStart = (startMinutes + 14) / 15 * 15;
-        int roundedFinish = finishMinutes / 15 * 15;
+        // Round login time up to the next full 15-minute interval
+        int loginRounded = ((loginMins + 14) / 15) * 15;
 
-        return Math.max(0, (roundedFinish - roundedStart) / 15);
+        // Round logout time down to the previous full 15-minute interval
+        int logoutRounded = (logoutMins / 15) * 15;
+
+        // Calculate full rounds
+        return Math.max(0, (logoutRounded - loginRounded) / 15);
     }
 
-    private int getMinutes(String time) {
-        int hrs = Integer.parseInt(time.substring(0, 2));
-        int min = Integer.parseInt(time.substring(3));
-        return hrs * 60 + min;
+    // Helper method to convert time to minutes
+    private int toMinutes(String time) {
+        String[] parts = time.split(":");
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+        return hours * 60 + minutes;
     }
 
     public static void main(String[] args) {

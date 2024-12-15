@@ -10,17 +10,24 @@ import (
 
 // T: O(1), S: O(1)
 func numberOfRounds(loginTime string, logoutTime string) int {
-	startMinutes := getMinutes(loginTime)
-	finishMinutes := getMinutes(logoutTime)
-
-	if finishMinutes < startMinutes {
-		finishMinutes += 24 * 60
+	toMinutes := func(time string) int {
+		parts := strings.Split(time, ":")
+		hours, _ := strconv.Atoi(parts[0])
+		minutes, _ := strconv.Atoi(parts[1])
+		return hours*60 + minutes
 	}
 
-	roundedStart := (startMinutes + 14) / 15 * 15
-	roundedFinish := finishMinutes / 15 * 15
+	loginMins := toMinutes(loginTime)
+	logoutMins := toMinutes(logoutTime)
 
-	return max(0, (roundedFinish-roundedStart)/15)
+	if logoutMins < loginMins {
+		logoutMins += 24 * 60
+	}
+
+	loginRounded := ((loginMins + 14) / 15) * 15
+	logoutRounded := (logoutMins / 15) * 15
+
+	return max(0, (logoutRounded-loginRounded)/15)
 }
 
 func getMinutes(time string) int {

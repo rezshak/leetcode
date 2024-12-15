@@ -4,20 +4,21 @@ class Solution1904:
 
     # T: O(1), S: O(1)
     def numberOfRounds(self, loginTime: str, logoutTime: str) -> int:
-        start_minutes = self.get_minutes(loginTime)
-        finish_minutes = self.get_minutes(logoutTime)
+        def to_minutes(time: str) -> int:
+            hours, minutes = map(int, time.split(':'))
+            return hours * 60 + minutes
 
-        if finish_minutes < start_minutes:
-            finish_minutes += 24 * 60
+        login_mins = to_minutes(loginTime)
+        logout_mins = to_minutes(logoutTime)
 
-        rounded_start = (start_minutes + 14) // 15 * 15
-        rounded_finish = finish_minutes // 15 * 15
+        if logout_mins < login_mins:
+            logout_mins += 24 * 60
 
-        return max(0, (rounded_finish - rounded_start) // 15)
+        login_rounded = ((login_mins + 14) // 15) * 15
 
-    def get_minutes(self, time: str) -> int:
-        hrs, min = map(int, time.split(':'))
-        return hrs * 60 + min
+        logout_rounded = (logout_mins // 15) * 15
+
+        return max(0, (logout_rounded - login_rounded) // 15)
 
 
 def main() -> None:
