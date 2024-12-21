@@ -33,19 +33,19 @@ class Solution143:
         # Reverse the second list
         prev = None
         while second:
-            temp_next = second.next
+            second_next = second.next
             second.next = prev
             prev = second
-            second = temp_next
+            second = second_next
         second = prev
         # Rebuild the list
         while second:
-            temp1 = first.next
-            temp2 = second.next
+            first_next = first.next
+            second_next = second.next
             first.next = second
-            second.next = temp1
-            first = temp1
-            second = temp2
+            second.next = first_next
+            first = first_next
+            second = second_next
 
 
 def main() -> None:

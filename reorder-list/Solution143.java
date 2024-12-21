@@ -18,20 +18,20 @@ class Solution143 {
         // Reverse the second list
         ListNode prev = null;
         while (second != null) {
-            var tempNext = second.next;
+            var secondNext = second.next;
             second.next = prev;
             prev = second;
-            second = tempNext;
+            second = secondNext;
         }
         second = prev;
         // Rebuild the list
         while (second != null) {
-            var temp1 = first.next;
-            var temp2 = second.next;
+            var firstNext = first.next;
+            var secondNext = second.next;
             first.next = second;
-            second.next = temp1;
-            first = temp1;
-            second = temp2;
+            second.next = firstNext;
+            first = firstNext;
+            second = secondNext;
         }
     }
 

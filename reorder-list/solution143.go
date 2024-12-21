@@ -25,20 +25,20 @@ func reorderList(head *ListNode) {
 	// Reverse the second list
 	var prev *ListNode
 	for second != nil {
-		tempNext := second.Next
+		secondNext := second.Next
 		second.Next = prev
 		prev = second
-		second = tempNext
+		second = secondNext
 	}
 	second = prev
 	// Rebuild the list
 	for second != nil {
-		temp1 := first.Next
-		temp2 := second.Next
+		firstNext := first.Next
+		secondNext := second.Next
 		first.Next = second
-		second.Next = temp1
-		first = temp1
-		second = temp2
+		second.Next = firstNext
+		first = firstNext
+		second = secondNext
 	}
 }
 
