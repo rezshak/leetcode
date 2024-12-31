@@ -7,31 +7,33 @@ import (
 )
 
 // T: O(n), S: O(1)
-func trap(heights []int) int {
-	left, right := 0, len(heights)-1
-	leftMax, rightMax := 0, 0
-	storedWater := 0
+func trap(height []int) int {
+	if len(height) < 3 {
+		return 0
+	}
 
-	for left <= right {
-		if leftMax <= rightMax {
-			storedWater += max(0, leftMax-heights[left])
-			leftMax = max(leftMax, heights[left])
+	left, right := 0, len(height)-1
+	leftMax, rightMax := 0, 0
+	totalWater := 0
+
+	for left < right {
+		if height[left] > leftMax {
+			leftMax = height[left]
+		}
+		if height[right] > rightMax {
+			rightMax = height[right]
+		}
+
+		if leftMax < rightMax {
+			totalWater += leftMax - height[left]
 			left++
 		} else {
-			storedWater += max(0, rightMax-heights[right])
-			rightMax = max(rightMax, heights[right])
+			totalWater += rightMax - height[right]
 			right--
 		}
 	}
 
-	return storedWater
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+	return totalWater
 }
 
 func main() {

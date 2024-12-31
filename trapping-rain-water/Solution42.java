@@ -3,24 +3,34 @@
 class Solution42 {
 
     // T: O(n), S: O(1)
-    public int trap(int[] heights) {
-        int left = 0, right = heights.length - 1;
-        int leftMax = 0, rightMax = 0;
-        int storedWater = 0;
+    public int trap(int[] height) {
+        // Edge case: if array is empty or too small to trap water
+        if (height == null || height.length < 3) {
+            return 0;
+        }
 
-        while (left <= right) {
-            if (leftMax <= rightMax) {
-                storedWater += Math.max(0, leftMax - heights[left]);
-                leftMax = Math.max(leftMax, heights[left]);
+        int left = 0, right = height.length - 1;
+        int leftMax = 0, rightMax = 0;
+        int totalWater = 0;
+
+        while (left < right) {
+            // Update maximum heights seen so far
+            leftMax = Math.max(leftMax, height[left]);
+            rightMax = Math.max(rightMax, height[right]);
+
+            // If left wall is smaller, calculate water trapped at left position
+            if (leftMax < rightMax) {
+                totalWater += leftMax - height[left];
                 left++;
-            } else {
-                storedWater += Math.max(0, rightMax - heights[right]);
-                rightMax = Math.max(rightMax, heights[right]);
+            }
+            // If right wall is smaller, calculate water trapped at right position
+            else {
+                totalWater += rightMax - height[right];
                 right--;
             }
         }
 
-        return storedWater;
+        return totalWater;
     }
 
     public static void main(String[] args) {
