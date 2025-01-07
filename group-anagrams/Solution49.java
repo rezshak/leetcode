@@ -9,9 +9,7 @@ class Solution49 {
         var map = new HashMap<String, List<String>>();
         for (var str : strs) {
             var key = makeKey(str);
-            if (!map.containsKey(key)) {
-                map.put(key, new ArrayList<String>());
-            }
+            map.putIfAbsent(key, new ArrayList<String>());
             map.get(key).add(str);
         }
         return new ArrayList<>(map.values());
@@ -32,4 +30,5 @@ class Solution49 {
         System.out.println(sol.groupAnagrams(strs2));
         System.out.println(sol.groupAnagrams(strs3));
     }
+
 }
