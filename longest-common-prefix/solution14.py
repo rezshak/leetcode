@@ -5,29 +5,50 @@ from typing import List
 
 class Solution14:
 
-    # T: O(n*m^2), S: O(1)
+    # T: O(S) where S is sum of all characters, S: O(1)
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        end_idx = 0
-        result = ""
-        for i in range(len(strs[0])):
-            candidate = strs[0][:end_idx + 1]
-            for j in range(1, len(strs)):
-                if not strs[j].startswith(candidate):
-                    return result
-            result = candidate
-            end_idx += 1
-        return result
+        if not strs:
+            return ""
 
-    # T: O(n*m), S: O(1)
-    def longestCommonPrefixOpt(self, strs: List[str]) -> str:
-        sb = []
+        min_len = min(len(s) for s in strs)
+        result = []
+
+        for i in range(min_len):
+            ch = strs[0][i]
+            if not all(s[i] == ch for s in strs):
+                break
+            result.append(ch)
+
+        return "".join(result)
+
+    # T: O(S) where S is sum of all characters, S: O(1)
+    def longestCommonPrefixOpt1(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+
+        result = []
         for i in range(len(strs[0])):
             ch = strs[0][i]
-            for str in strs:
-                if i >= len(str) or str[i] != ch:
-                    return "".join(sb)
-            sb.append(ch)
-        return "".join(sb)
+            if any(i >= len(s) or s[i] != ch for s in strs):
+                break
+            result.append(ch)
+
+        return "".join(result)
+
+    # T: O(n*log(n)) for sorting + O(m) for comparison
+    # S: O(1) not counting the sort space
+    def longestCommonPrefixOpt2(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+
+        strs.sort()
+        first, last = strs[0], strs[-1]
+
+        for i, ch in enumerate(first):
+            if i >= len(last) or ch != last[i]:
+                return first[:i]
+
+        return first
 
 
 def main() -> None:
@@ -38,9 +59,12 @@ def main() -> None:
     print(sol.longestCommonPrefix(strs1))    # fl
     print(sol.longestCommonPrefix(strs2))    # ""
     print(sol.longestCommonPrefix(strs3))    # a
-    print(sol.longestCommonPrefixOpt(strs1))  # fl
-    print(sol.longestCommonPrefixOpt(strs2))  # ""
-    print(sol.longestCommonPrefixOpt(strs3))  # a
+    print(sol.longestCommonPrefixOpt1(strs1))  # fl
+    print(sol.longestCommonPrefixOpt1(strs2))  # ""
+    print(sol.longestCommonPrefixOpt1(strs3))  # a
+    print(sol.longestCommonPrefixOpt2(strs1))  # fl
+    print(sol.longestCommonPrefixOpt2(strs2))  # ""
+    print(sol.longestCommonPrefixOpt2(strs3))  # a
 
 
 if __name__ == "__main__":
