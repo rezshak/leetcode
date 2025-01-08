@@ -7,10 +7,12 @@ import "fmt"
 // T: O(n), S: O(1)
 func removeElement(nums []int, val int) int {
 	k := 0
-	for _, n := range nums {
+	for i, n := range nums {
 		if n != val {
 			nums[k] = n
 			k++
+		} else {
+			nums[i] = 0
 		}
 	}
 	return k
