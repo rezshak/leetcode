@@ -2,14 +2,23 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
+
+// T: O(n), S: O(1)
+func majorityElement(nums []int) int {
+	sort.Ints(nums)
+	return nums[len(nums)/2]
+}
 
 // T: O(n), S: O(n)
-func majorityElement(nums []int) int {
-	freqs := make(map[int]int)
+func majorityElementMap(nums []int) int {
+	counts := make(map[int]int)
 	for _, num := range nums {
-		freqs[num]++
-		if freqs[num] > len(nums)/2 {
+		counts[num]++
+		if counts[num] > len(nums)/2 {
 			return num
 		}
 	}
@@ -17,27 +26,31 @@ func majorityElement(nums []int) int {
 }
 
 // T: O(n), S: O(1)
-func majorityElement2(nums []int) int {
-	majority := nums[0]
-	count := 1
-	for i := 1; i < len(nums); i++ {
+func majorityElementBoyerMoore(nums []int) int {
+	count := 0
+	candidate := 0
+
+	for _, num := range nums {
 		if count == 0 {
-			majority = nums[i]
-			count++
-		} else if majority == nums[i] {
+			candidate = num
+		}
+		if num == candidate {
 			count++
 		} else {
 			count--
 		}
 	}
-	return majority
+
+	return candidate
 }
 
 func main() {
 	nums1 := []int{3, 2, 3}
 	nums2 := []int{2, 2, 1, 1, 1, 2, 2}
-	fmt.Println(majorityElement(nums1))  // 3
-	fmt.Println(majorityElement(nums2))  // 2
-	fmt.Println(majorityElement2(nums1)) // 3
-	fmt.Println(majorityElement2(nums2)) // 2
+	fmt.Println(majorityElement(nums1))           // 3
+	fmt.Println(majorityElement(nums2))           // 2
+	fmt.Println(majorityElementMap(nums1))        // 3
+	fmt.Println(majorityElementMap(nums2))        // 2
+	fmt.Println(majorityElementBoyerMoore(nums1)) // 3
+	fmt.Println(majorityElementBoyerMoore(nums2)) // 2
 }

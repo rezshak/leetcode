@@ -1,41 +1,47 @@
 // https://leetcode.com/problems/majority-element/
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 class Solution169 {
 
-    // T: O(n), S: O(n)
+    // T: O(n), S: O(1)
+    // Sort the array and return the middle element
     public int majorityElement(int[] nums) {
-        var freqs = new HashMap<Integer, Integer>();
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    // T: O(n), S: O(n)
+    // Use a hashmap to count occurrences of each element
+    public int majorityElementMap(int[] nums) {
+        var counts = new HashMap<Integer, Integer>();
+        int n = nums.length;
+
         for (int num : nums) {
-            freqs.put(num, freqs.getOrDefault(num, 0) + 1);
-        }
-        int count = Integer.MIN_VALUE;
-        int num = Integer.MIN_VALUE;
-        for (var entry : freqs.entrySet()) {
-            if (entry.getValue() > count) {
-                count = entry.getValue();
-                num = entry.getKey();
+            counts.put(num, counts.getOrDefault(num, 0) + 1);
+            if (counts.get(num) > n / 2) {
+                return num;
             }
         }
-        return num;
+
+        return -1; // Won't reach here given problem constraints
     }
 
     // T: O(n), S: O(1)
-    public int majorityElement2(int[] nums) {
-        int majority = nums[0];
-        int count = 1;
-        for (int i = 1; i < nums.length; i++) {
+    // Boyer-Moore Voting Algorithm
+    public int majorityElementBoyerMoore(int[] nums) {
+        int count = 0;
+        int candidate = 0;
+
+        for (int num : nums) {
             if (count == 0) {
-                majority = nums[i];
-                count = 1;
-            } else if (nums[i] == majority) {
-                count++;
-            } else {
-                count--;
+                candidate = num;
             }
+            count += (num == candidate) ? 1 : -1;
         }
-        return majority;
+
+        return candidate;
     }
 
     public static void main(String[] args) {
@@ -44,8 +50,10 @@ class Solution169 {
         var nums2 = new int[] { 2, 2, 1, 1, 1, 2, 2 };
         System.out.println(sol.majorityElement(nums1)); // 3
         System.out.println(sol.majorityElement(nums2)); // 2
-        System.out.println(sol.majorityElement2(nums1)); // 3
-        System.out.println(sol.majorityElement2(nums2)); // 2
+        System.out.println(sol.majorityElementMap(nums1)); // 3
+        System.out.println(sol.majorityElementMap(nums2)); // 2
+        System.out.println(sol.majorityElementBoyerMoore(nums1)); // 3
+        System.out.println(sol.majorityElementBoyerMoore(nums2)); // 2
     }
 
 }
