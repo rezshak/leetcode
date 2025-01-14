@@ -54,20 +54,20 @@ class Solution198 {
     // T: O(n), S: O(n)
     public int robMemo(int[] nums) {
         var memo = new HashMap<Integer, Integer>();
-        return helper(nums, 0, memo);
+        return dfsMemo(nums, 0, memo);
     }
 
-    private int helper(int[] nums, int index, Map<Integer, Integer> memo) {
-        if (index >= nums.length) {
+    private int dfsMemo(int[] nums, int i, Map<Integer, Integer> memo) {
+        if (i >= nums.length) {
             return 0;
         }
-        if (memo.containsKey(index)) {
-            return memo.get(index);
+        if (memo.containsKey(i)) {
+            return memo.get(i);
         }
-        int robCurrent = nums[index] + helper(nums, index + 2, memo);
-        int skipCurrent = helper(nums, index + 1, memo);
-        int result = Math.max(robCurrent, skipCurrent);
-        memo.put(index, result);
+        int skip = dfsMemo(nums, i + 1, memo);
+        int rob = nums[i] + dfsMemo(nums, i + 2, memo);
+        int result = Math.max(rob, skip);
+        memo.put(i, result);
         return result;
     }
 
@@ -77,10 +77,19 @@ class Solution198 {
     }
 
     private int dfs(int[] nums, int i) {
+        // Base case: all houses processed
         if (i >= nums.length) {
             return 0;
         }
-        return Math.max(dfs(nums, i + 1), nums[i] + dfs(nums, i + 2));
+
+        // Option 1: skip current nums[i] and move to next house (i+1)
+        int skip = dfs(nums, i + 1);
+
+        // Option 2: Rob current nums[i] and move to house after next (i+2)
+        int rob = nums[i] + dfs(nums, i + 2);
+
+        // Return the maximum money we can get from either choice
+        return Math.max(skip, rob);
     }
 
     public static void main(String[] args) {

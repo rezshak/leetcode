@@ -43,25 +43,28 @@ class Solution198:
     # T: O(n), S: O(n)
     def robMemo(self, nums: List[int]) -> int:
         memo = {}
-        return self.helper(nums, 0, memo)
+        return self.dfsMemo(nums, 0, memo)
 
-    def helper(self, nums, i, memo):
+    def dfsMemo(self, nums, i, memo):
         if i >= len(nums):
             return 0
         if i in memo:
             return memo[i]
-        memo[i] = max(self.helper(nums, i + 1, memo),
-                      nums[i] + self.helper(nums, i + 2, memo))
+        skip = self.dfsMemo(nums, i + 1, memo)
+        rob = nums[i] + self.dfsMemo(nums, i + 2, memo)
+        memo[i] = max(skip, rob)
         return memo[i]
 
     # T: O(2^n), S: O(n)
     def robBrute(self, nums):
-        return self.dfs(nums, 0)
+        return self.dfsBrute(nums, 0)
 
-    def dfs(self, nums, i):
+    def dfsBrute(self, nums, i):
         if i >= len(nums):
             return 0
-        return max(self.dfs(nums, i + 1), nums[i] + self.dfs(nums, i + 2))
+        skip = self.dfsBrute(nums, i + 1)
+        rob = nums[i] + self.dfsBrute(nums, i + 2)
+        return max(skip, rob)
 
 
 def main() -> None:

@@ -52,30 +52,34 @@ func robDp(nums []int) int {
 // T: O(n), S: O(n)
 func robMemo(nums []int) int {
 	memo := make(map[int]int)
-	return helper(nums, 0, memo)
+	return dfsMemo(nums, 0, memo)
 }
 
-func helper(nums []int, i int, memo map[int]int) int {
+func dfsMemo(nums []int, i int, memo map[int]int) int {
 	if i >= len(nums) {
 		return 0
 	}
 	if val, ok := memo[i]; ok {
 		return val
 	}
-	memo[i] = max(helper(nums, i+1, memo), nums[i]+helper(nums, i+2, memo))
+	skip := dfsMemo(nums, i+1, memo)
+	rob := nums[i] + dfsMemo(nums, i+2, memo)
+	memo[i] = max(skip, rob)
 	return memo[i]
 }
 
 // T: O(2^n), S: O(n)
 func robBrute(nums []int) int {
-	return dfs(nums, 0)
+	return dfsBrute(nums, 0)
 }
 
-func dfs(nums []int, i int) int {
+func dfsBrute(nums []int, i int) int {
 	if i >= len(nums) {
 		return 0
 	}
-	return max(dfs(nums, i+1), nums[i]+dfs(nums, i+2))
+	skip := dfsBrute(nums, i+1)
+	rob := nums[i] + dfsBrute(nums, i+2)
+	return max(skip, rob)
 }
 
 func main() {
