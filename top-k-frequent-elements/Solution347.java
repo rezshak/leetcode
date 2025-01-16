@@ -7,7 +7,7 @@ class Solution347 {
     // Using Bucket Sort
     // T: O(n), S: O(n)
     public int[] topKFrequent(int[] nums, int k) {
-        // Step 1: Count frequencies
+        // Step 1: Count frequencies using HashMap
         var counts = new HashMap<Integer, Integer>();
         for (int num : nums) {
             counts.put(num, counts.getOrDefault(num, 0) + 1);
@@ -15,14 +15,15 @@ class Solution347 {
 
         // Step 2: Create bucket list where index represents frequency
         var buckets = new ArrayList<List<Integer>>();
-        for (int i = 0; i <= nums.length; i++) {
+        for (int i = 0; i < nums.length + 1; i++) {
             buckets.add(new ArrayList<>());
         }
 
         // Step 3: Put numbers in buckets based on their frequency
-        for (int num : counts.keySet()) {
-            int frequency = counts.get(num);
-            buckets.get(frequency).add(num);
+        for (var entry : counts.entrySet()) {
+            int num = entry.getKey();
+            int freq = entry.getValue();
+            buckets.get(freq).add(num);
         }
 
         // Step 4: Build result array from most frequent to least
@@ -31,8 +32,6 @@ class Solution347 {
             for (int num : buckets.get(i)) {
                 if (j < k) {
                     result[j++] = num;
-                } else {
-                    break;
                 }
             }
         }

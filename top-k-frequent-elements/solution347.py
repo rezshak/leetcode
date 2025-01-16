@@ -10,17 +10,13 @@ class Solution347:
     # Using Bucket Sort
     # T: O(n), S: O(n)
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # Step 1: Count frequencies
         counts = Counter(nums)
 
-        # Step 2: Create bucket list where index represents frequency
         buckets = [[] for _ in range(len(nums) + 1)]
 
-        # Step 3: Put numbers in buckets based on their frequency
         for num, freq in counts.items():
             buckets[freq].append(num)
 
-        # Step 4: Build result array from most frequent to least
         result = []
         for i in range(len(buckets) - 1, -1, -1):
             result.extend(buckets[i])
