@@ -26,5 +26,12 @@
             "program": "${file}",
             "console": "integratedTerminal"
         },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch TypeScript File",
+            "program": "${file}",
+            "preLaunchTask": "tsc: build - tsconfig.json"
+        }
     ]
 }
