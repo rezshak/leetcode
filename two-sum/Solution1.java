@@ -7,13 +7,13 @@ class Solution1 {
 
     // T: O(n), S: O(n)
     public int[] twoSum(int[] nums, int target) {
-        var idxMap = new HashMap<Integer, Integer>(); // num, idx
+        var indices = new HashMap<Integer, Integer>(); // num, idx
         for (var i = 0; i < nums.length; i++) {
             var diff = target - nums[i];
-            if (idxMap.containsKey(diff)) {
-                return new int[] { idxMap.get(diff), i };
+            if (indices.containsKey(diff)) {
+                return new int[] { indices.get(diff), i };
             }
-            idxMap.put(nums[i], i);
+            indices.put(nums[i], i);
         }
 
         return new int[] { 0, 0 };
