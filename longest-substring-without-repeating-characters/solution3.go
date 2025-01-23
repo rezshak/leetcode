@@ -4,26 +4,50 @@ package main
 
 import "fmt"
 
-// T: O(n), S: O(min(n, m))
+// T: O(n), S: O(k) where k is the unique characters in the string
 func lengthOfLongestSubstring(s string) int {
 	seen := make(map[byte]bool)
-	n, maxLen, l := len(s), 0, 0
-	for r := 0; r < n; r++ {
-		for seen[s[r]] {
-			delete(seen, s[l])
-			l++
+	left, right := 0, 0
+	result := 0
+	for right < len(s) {
+		if seen[s[right]] {
+			delete(seen, s[left])
+			left++
+		} else {
+			seen[s[right]] = true
+			right++
+			result = max(result, right-left)
 		}
-		seen[s[r]] = true
-		maxLen = max(maxLen, r-l+1)
 	}
-	return maxLen
+	return result
+}
+
+// T: O(n), S: O(k)
+func lengthOfLongestSubstringOpt(s string) int {
+	indices := make(map[byte]int)
+	result := 0
+	for left, right := 0, 0; right < len(s); right++ {
+		curr := s[right]
+		if prevIdx, found := indices[curr]; found && prevIdx >= left {
+			left = prevIdx + 1
+		}
+		indices[curr] = right
+		result = max(result, right-left+1)
+	}
+	return result
 }
 
 func main() {
 	s1 := "abcabcbb"
 	s2 := "bbbbb"
 	s3 := "pwwkew"
-	fmt.Println(lengthOfLongestSubstring(s1)) // 3
-	fmt.Println(lengthOfLongestSubstring(s2)) // 1
-	fmt.Println(lengthOfLongestSubstring(s3)) // 3
+	s4 := "aab"
+	fmt.Println(lengthOfLongestSubstring(s1))    // 3
+	fmt.Println(lengthOfLongestSubstringOpt(s1)) // 3
+	fmt.Println(lengthOfLongestSubstring(s2))    // 1
+	fmt.Println(lengthOfLongestSubstringOpt(s2)) // 1
+	fmt.Println(lengthOfLongestSubstring(s3))    // 3
+	fmt.Println(lengthOfLongestSubstringOpt(s3)) // 3
+	fmt.Println(lengthOfLongestSubstring(s4))    // 2
+	fmt.Println(lengthOfLongestSubstringOpt(s4)) // 2
 }
